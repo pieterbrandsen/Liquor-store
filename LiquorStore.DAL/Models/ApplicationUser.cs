@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LiquorStore.DAL.Models
 {
-    class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

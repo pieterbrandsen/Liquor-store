@@ -7,6 +7,8 @@ namespace LiquorStore.DAL.Models
 {
     public class WhiskyModel
     {
+        [Key]
+        public string Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public string ProductionArea { get; set; }
