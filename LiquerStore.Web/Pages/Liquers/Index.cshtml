@@ -43,11 +43,11 @@
                 filter: true, // this is for disable filter (search box)
                 orderMulti: false, // for disable multiple column at once
                 columns: [
-                    { "data": "Name", "name": "Name" },
-                    { "data": "Age", "age": "Age" },
-                    { "data": "ProductionArea", "productionArea": "ProductionArea" },
-                    { "data": "AlcoholPercentage", "alcoholPercentage": "AlcoholPercentage" },
-                    { "data": "Kind", "kind": "Kind" },
+                    { "data": "Name", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Name)" },
+                    { "data": "Age", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Age)" },
+                    { "data": "ProductionArea", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].ProductionArea)" },
+                    { "data": "AlcoholPercentage", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].AlcoholPercentage)" },
+                    { "data": "Kind", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Kind)" },
                 ]
             });
         });
