@@ -24,6 +24,7 @@ namespace LiquerStore.Web.Pages.Liquers
         public async Task OnGetAsync()
         {
             WhiskyModel = await _context.Whiskies.ToListAsync();
+            object WhiskyModelJson = Newtonsoft.Json.JsonConvert.SerializeObject(WhiskyModel);
         }
     }
 }
