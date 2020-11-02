@@ -13,14 +13,14 @@ namespace LiquerStore.Web.Data
             : base(options)
         {
         }
+
         // All whiskies
-        DbSet<WhiskyModel> whiskies { get; set; }
+        public DbSet<WhiskyModel> Whiskies { get; set; }
 
         // Employees
-        DbSet<EmployeeModel> employees { get; set; }
-
+        public DbSet<EmployeeModel> Employees { get; set; }
 
         // Customers
-        DbSet<CustomerModel> customers { get; set; }
+        public DbSet<CustomerModel> Customers { get; set; }
     }
 }
