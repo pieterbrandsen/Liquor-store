@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>aspnet-Liquor_store-10B60828-C6C9-403A-BF25-341BC23CE4DF</UserSecretsId>
-    <RootNamespace>Liquor_store</RootNamespace>
+    <UserSecretsId>aspnet-LiquerStore.Web-8CC3FBAF-0560-40EB-966F-499CAC023FF1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

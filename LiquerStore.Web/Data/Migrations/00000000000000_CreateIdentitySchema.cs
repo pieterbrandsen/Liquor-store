@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Liquor_store.Data.Migrations
+namespace LiquerStore.Web.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

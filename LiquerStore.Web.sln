@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liquor store", "Liquor store\Liquor store.csproj", "{4A8D9597-0F4F-45AF-BB7C-55FDD4065A62}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiquerStore.Web", "LiquerStore.Web\LiquerStore.Web.csproj", "{7EBF3502-19B7-4F00-880D-FEDA0E82A31E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4A8D9597-0F4F-45AF-BB7C-55FDD4065A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A8D9597-0F4F-45AF-BB7C-55FDD4065A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A8D9597-0F4F-45AF-BB7C-55FDD4065A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A8D9597-0F4F-45AF-BB7C-55FDD4065A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EBF3502-19B7-4F00-880D-FEDA0E82A31E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EBF3502-19B7-4F00-880D-FEDA0E82A31E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EBF3502-19B7-4F00-880D-FEDA0E82A31E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EBF3502-19B7-4F00-880D-FEDA0E82A31E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BCD4D506-0E4F-48F4-A567-D6716CEF7C71}
+		SolutionGuid = {ECBA473D-9736-45C2-BE1E-DA2436B0E1E6}
 	EndGlobalSection
 EndGlobal
