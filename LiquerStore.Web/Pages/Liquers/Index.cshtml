@@ -16,7 +16,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.WhiskyModel[0].Name)
             </th>
-            @*<th>
+            <th>
                     @Html.DisplayNameFor(model => model.WhiskyModel[0].Age)
                 </th>
                 <th>
@@ -28,41 +28,8 @@
                 <th>
                     @Html.DisplayNameFor(model => model.WhiskyModel[0].Kind)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WhiskyModel[0].LabelPath)
-                </th>
-                <th></th>*@
         </tr>
     </thead>
-    @*<tbody>
-        @foreach (var item in Model.WhiskyModel) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Age)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductionArea)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AlcoholPercentage)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Kind)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LabelPath)
-                    </td>
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-        }
-            </tbody>*@
 </table>
 
 @section Scripts {
@@ -72,6 +39,10 @@
                 data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.WhiskyModel)),
                 columns: [
                     { "data": "Name", "name": "Name" },
+                    { "data": "Age", "age": "Age" },
+                    { "data": "ProductionArea", "productionArea": "ProductionArea" },
+                    { "data": "AlcoholPercentage", "alcoholPercentage": "AlcoholPercentage" },
+                    { "data": "Kind", "kind": "Kind" },
                 ]
             });
         });
