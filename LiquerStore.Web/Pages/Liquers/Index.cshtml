@@ -65,15 +65,17 @@
             </tbody>*@
 </table>
 
-<script>
-    $(document).ready( function () {
-        $('#table').DataTable({
-                data: @,
-    columns: [
-        { "data": "Name" },
-    ]
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable({
+                data: "@Newtonsoft.Json.JsonConvert.SerializeObject(Model.WhiskyModel)",
+                columns: [
+                    { "data": "Name", "name": "Name" },
+                ]
+            });
         });
-    });
 
-    console.log(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.WhiskyModel))
-</script>
+        console.log(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.WhiskyModel))
+    </script>
+}
