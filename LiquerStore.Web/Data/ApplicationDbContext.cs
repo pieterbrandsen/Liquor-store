@@ -22,7 +22,5 @@ namespace LiquerStore.Web.Data
 
         // Customers
         DbSet<CustomerModel> customers { get; set; }
-
-
     }
 }
