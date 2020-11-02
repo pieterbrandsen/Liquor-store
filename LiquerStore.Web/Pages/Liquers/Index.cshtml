@@ -69,13 +69,13 @@
     <script>
         $(document).ready(function () {
             $('#table').DataTable({
-                data: "@Newtonsoft.Json.JsonConvert.SerializeObject(Model.WhiskyModel)",
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.WhiskyModel)),
                 columns: [
                     { "data": "Name", "name": "Name" },
                 ]
             });
         });
 
-        console.log(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.WhiskyModel))
+        console.log(@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.WhiskyModel)))
     </script>
 }
