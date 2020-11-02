@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LiquorStore.DAL.Models
 {
-    class CustomerModel : ApplicationUser
+    public class CustomerModel : ApplicationUser
     {
     }
 }
