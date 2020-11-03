@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace LiquorStore.DAL.Models
@@ -28,9 +31,10 @@ namespace LiquorStore.DAL.Models
         public bool SoftDeleted { get; set; }
     }
 
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum WhiskyKind
     {
         Blend,
-        [Display(Name = "Single Malt")] SingleMalt
+        [Display(Name = "Single Malt"), EnumMember(Value = "Single Malt")] SingleMalt
     }
 }
