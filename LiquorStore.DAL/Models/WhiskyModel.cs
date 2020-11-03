@@ -25,6 +25,7 @@ namespace LiquorStore.DAL.Models
         [Display(Name = "Soort")]
         public WhiskyKind Kind { get; set; }
         public string LabelPath { get; set; }
+        public bool softDeleted { get; set; }
     }
 
     public enum WhiskyKind

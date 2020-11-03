@@ -13,9 +13,9 @@ namespace LiquerStore.Web.Pages.Liquers
 {
     public class EditModel : PageModel
     {
-        private readonly LiquerStore.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public EditModel(LiquerStore.Web.Data.ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context)
         {
             _context = context;
         }
