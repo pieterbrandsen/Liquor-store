@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LiquorStore.DAL.Models
+namespace LiquerStore.DAL.Models
 {
     public class EmployeeModel : ApplicationUser
     {

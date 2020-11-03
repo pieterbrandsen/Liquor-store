@@ -21,7 +21,7 @@ namespace LiquerStore.Web.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("LiquorStore.DAL.Models.WhiskyModel", b =>
+            modelBuilder.Entity("LiquerStore.DAL.Models.WhiskyModel", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -258,7 +258,7 @@ namespace LiquerStore.Web.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("LiquorStore.DAL.Models.CustomerModel", b =>
+            modelBuilder.Entity("LiquerStore.DAL.Models.CustomerModel", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -277,7 +277,7 @@ namespace LiquerStore.Web.Data.Migrations
                     b.HasDiscriminator().HasValue("CustomerModel");
                 });
 
-            modelBuilder.Entity("LiquorStore.DAL.Models.EmployeeModel", b =>
+            modelBuilder.Entity("LiquerStore.DAL.Models.EmployeeModel", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 

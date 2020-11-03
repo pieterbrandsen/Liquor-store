@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace LiquorStore.DAL.Models
+namespace LiquerStore.DAL.Models
 {
     public class WhiskyModel
     {
@@ -19,7 +19,7 @@ namespace LiquorStore.DAL.Models
         public string Name { get; set; }
         
         [Display(Name = "Leeftijd")]
-        public byte Age { get; set; }
+        public int Age { get; set; }
 
         [Display(Name = "Productiegebied")]
         public string ProductionArea { get; set; }

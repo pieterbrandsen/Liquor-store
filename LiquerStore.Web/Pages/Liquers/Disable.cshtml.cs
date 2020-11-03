@@ -6,15 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using LiquerStore.Web.Data;
-using LiquorStore.DAL.Models;
+using LiquerStore.DAL.Models;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
     public class DisableModel : PageModel
     {
-        private readonly LiquerStore.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DisableModel(LiquerStore.Web.Data.ApplicationDbContext context)
+        public DisableModel(ApplicationDbContext context)
         {
             _context = context;
         }

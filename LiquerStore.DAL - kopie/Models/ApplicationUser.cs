@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace LiquorStore.DAL.Models
+namespace LiquerStore.DAL.Models
 {
     public class ApplicationUser : IdentityUser
     {
