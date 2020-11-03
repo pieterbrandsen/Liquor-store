@@ -10,11 +10,11 @@ using LiquorStore.DAL.Models;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
-    public class DisableModel : PageModel
+    public class EnableModel : PageModel
     {
         private readonly LiquerStore.Web.Data.ApplicationDbContext _context;
 
-        public DisableModel(LiquerStore.Web.Data.ApplicationDbContext context)
+        public EnableModel(LiquerStore.Web.Data.ApplicationDbContext context)
         {
             _context = context;
         }
@@ -49,7 +49,7 @@ namespace LiquerStore.Web.Pages.Liquers
 
             if (WhiskyModel != null)
             {
-                WhiskyModel.SoftDeleted = true;
+                WhiskyModel.SoftDeleted = false;
                 _context.Whiskies.Update(WhiskyModel);
                 await _context.SaveChangesAsync();
             }

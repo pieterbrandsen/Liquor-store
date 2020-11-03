@@ -3,6 +3,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -11,13 +12,14 @@ namespace LiquorStore.DAL.Models
     public class WhiskyModel
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         
         [Display(Name = "Naam")]
         public string Name { get; set; }
         
         [Display(Name = "Leeftijd")]
-        public int Age { get; set; }
+        public byte Age { get; set; }
 
         [Display(Name = "Productiegebied")]
         public string ProductionArea { get; set; }
@@ -27,7 +29,10 @@ namespace LiquorStore.DAL.Models
 
         [Display(Name = "Soort")]
         public WhiskyKind Kind { get; set; }
+        [Display(Name = "Afbeelding locatie")]
         public string LabelPath { get; set; }
+        [Display(Name = "Aantal")]
+        public int Count { get; set; }
         public bool SoftDeleted { get; set; }
     }
 

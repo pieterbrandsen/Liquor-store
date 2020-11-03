@@ -2,10 +2,10 @@
 @model LiquerStore.Web.Pages.Liquers.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Producten";
 }
 
-<h1>Index</h1>
+<h1>Producten</h1>
 
 <p>
     <a asp-page="Create">Maak een whisky</a>
@@ -28,6 +28,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.WhiskyModel[0].Kind)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WhiskyModel[0].Count)
             </th>
             <th>
                 Aanpassen
@@ -57,17 +60,24 @@
                     { "data": "ProductionArea", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].ProductionArea)" },
                     { "data": "AlcoholPercentage", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].AlcoholPercentage)" },
                     { "data": "Kind", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Kind)" },
+                    { "data": "Count", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Count)" },
                     {
                         "render": function (data, type, full, meta)
-                        { return '<a class="btn btn-info" href="/Liquers/Edit?Id=' + full.Id + '"> test </a>'; }
+                        { return '<a class="btn btn-info" href="/Liquers/Edit?Id=' + full.Id + '">Aanpassen</a>'; }
                     },
                     {
                         "render": function (data, type, full, meta)
-                        { return '<a class="btn btn-error" href="/Liquers/Details?Id=' + full.Id + '"> test </a>'; }
+                        { return '<a class="btn btn-warning" href="/Liquers/Details?Id=' + full.Id + '">Alle gegevens</a>'; }
                     },
                     {
                         "render": function (data, type, full, meta)
-                        { return '<a class="btn btn-danger" href="/Liquers/Disable?Id=' + full.Id + '"> test </a>'; }
+                        {
+                            if (full.SoftDeleted === false) {
+                                return '<a class="btn btn-danger" href="/Liquers/Disable?Id=' + full.Id + '">Zet uit</a>';
+
+                            }
+                            else return '<a class="btn btn-success" href="/Liquers/Enable?Id=' + full.Id + '">Zet aan</a>';
+                        }
                     },
                 ]
             });

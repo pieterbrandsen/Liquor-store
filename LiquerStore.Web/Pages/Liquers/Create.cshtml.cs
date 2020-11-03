@@ -35,7 +35,6 @@ namespace LiquerStore.Web.Pages.Liquers
             {
                 return Page();
             }
-
             _context.Whiskies.Add(WhiskyModel);
             await _context.SaveChangesAsync();
 

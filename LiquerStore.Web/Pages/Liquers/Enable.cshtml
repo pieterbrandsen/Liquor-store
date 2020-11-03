@@ -1,12 +1,13 @@
 ﻿@page
-@model LiquerStore.Web.Pages.Liquers.DetailsModel
+@model LiquerStore.Web.Pages.Liquers.EnableModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Zet aan";
 }
 
-<h1>Details</h1>
+<h1>Alle gegevens</h1>
 
+<h3>Ben je zeker dat je dit product wil aanzetten?</h3>
 <div>
     <h4>Product</h4>
     <hr />
@@ -54,8 +55,10 @@
             @Html.DisplayFor(model => model.WhiskyModel.Count)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.WhiskyModel.Id">Pas aan</a> |
-    <a asp-page="./Index">Terug naar product lijst</a>
+    
+    <form method="post">
+        <input type="hidden" asp-for="WhiskyModel.Id" />
+        <input type="submit" value="Zet aan" class="btn btn-success" /> |
+        <a asp-page="./Index">Terug naar product lijst</a>
+    </form>
 </div>

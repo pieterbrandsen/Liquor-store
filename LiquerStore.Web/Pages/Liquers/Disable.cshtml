@@ -1,15 +1,15 @@
 ﻿@page
-@model LiquerStore.Web.Pages.Liquers.DeleteModel
+@model LiquerStore.Web.Pages.Liquers.DisableModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Zet uit";
 }
 
-<h1>Delete</h1>
+<h1>Alle gegevens</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Ben je zeker dat je dit product wil uitzetten? Alle bestelde producten zullen nog zichtbaar zijn bij de klant</h3>
 <div>
-    <h4>WhiskyModel</h4>
+    <h4>Product</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -48,11 +48,17 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.WhiskyModel.LabelPath)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WhiskyModel.Count)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WhiskyModel.Count)
+        </dd>
     </dl>
     
     <form method="post">
         <input type="hidden" asp-for="WhiskyModel.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Zet uit" class="btn btn-danger" /> |
+        <a asp-page="./Index">Terug naar product lijst</a>
     </form>
 </div>

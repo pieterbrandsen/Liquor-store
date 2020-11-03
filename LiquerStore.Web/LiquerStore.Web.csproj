@@ -23,4 +23,8 @@
     <ProjectReference Include="..\LiquorStore.DAL\LiquorStore.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Order\" />
+  </ItemGroup>
+
 </Project>

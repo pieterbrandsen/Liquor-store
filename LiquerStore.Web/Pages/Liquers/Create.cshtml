@@ -3,22 +3,17 @@
 @using LiquorStore.DAL.Models;
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Aanmaken";
 }
 
-<h1>Create</h1>
+<h1>Product aanmaken</h1>
 
-<h4>WhiskyModel</h4>
+<h4>Product</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="WhiskyModel.Id" class="control-label"></label>
-                <input asp-for="WhiskyModel.Id" class="form-control" />
-                <span asp-validation-for="WhiskyModel.Id" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="WhiskyModel.Name" class="control-label"></label>
                 <input asp-for="WhiskyModel.Name" class="form-control" />
@@ -26,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="WhiskyModel.Age" class="control-label"></label>
-                <input asp-for="WhiskyModel.Age" class="form-control" />
+                <input asp-for="WhiskyModel.Age" max="255" class="form-control" />
                 <span asp-validation-for="WhiskyModel.Age" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -50,14 +45,19 @@
                 <span asp-validation-for="WhiskyModel.LabelPath" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="WhiskyModel.Count"></label>
+                <input asp-for="WhiskyModel.Count" min="1" value="1" class="form-control" />
+                <span asp-validation-for="WhiskyModel.Count" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Maak aan" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Terug naar product lijst</a>
 </div>
 
 @section Scripts {
