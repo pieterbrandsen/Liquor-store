@@ -46,6 +46,10 @@
 </table>
 
 @section Scripts {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('#table').DataTable({
@@ -63,7 +67,7 @@
                     { "data": "Count", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Count)" },
                     {
                         "render": function (data, type, full, meta)
-                        { return '<a class="btn btn-info" href="/Liquers/Edit?Id=' + full.Id + '">Aanpassen</a>'; }
+                        { return '<a class="btn btn-info" href="/Liquers/Edit/' + full.Id + '">Aanpassen</a>'; }
                     },
                     {
                         "render": function (data, type, full, meta)
