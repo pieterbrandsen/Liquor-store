@@ -15,22 +15,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().Name)
+                @Html.DisplayNameFor(model => model.WhiskyModel.First().Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().Age)
+                @Html.DisplayNameFor(model => model.WhiskyModel.First().Age)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().ProductionArea)
+                @Html.DisplayNameFor(model => model.WhiskyModel.First().ProductionArea)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().AlcoholPercentage)
+                @Html.DisplayNameFor(model => model.WhiskyModel.First().AlcoholPercentage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().Kind)
+                @Html.DisplayNameFor(model => model.WhiskyModel.First().Kind)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().Count)
+                @Html.DisplayNameFor(model => model.WhiskyModel.First().Count)
             </th>
             <th>
                 Aanpassen
@@ -59,28 +59,28 @@
                 filter: true, // this is for disable filter (search box)
                 orderMulti: false, // for disable multiple column at once
                 columns: [
-                    { "data": "Name", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().Name)" },
-                    { "data": "Age", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().Age)" },
-                    { "data": "ProductionArea", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().ProductionArea)" },
-                    { "data": "AlcoholPercentage", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().AlcoholPercentage)" },
-                    { "data": "Kind", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().Kind)" },
-                    { "data": "Count", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.FirstOrDefault().Count)" },
+                    { "data": "Name", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().Name)" },
+                    { "data": "Age", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().Age)" },
+                    { "data": "ProductionArea", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().ProductionArea)" },
+                    { "data": "AlcoholPercentage", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().AlcoholPercentage)" },
+                    { "data": "Kind", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().Kind)" },
+                    { "data": "Count", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().Count)" },
                     {
                         "render": function (data, type, full, meta)
-                        { return '<a class="btn btn-info" href="/Liquers/Edit?Id=' + full.Id + '">Aanpassen</a>'; }
+                        { return `<a class="btn btn-info" href="/Liquers/Edit?Id=${full.Id}">Aanpassen</a>`; }
                     },
                     {
                         "render": function (data, type, full, meta)
-                        { return '<a class="btn btn-warning" href="/Liquers/Details?Id=' + full.Id + '">Alle gegevens</a>'; }
+                        { return `<a class="btn btn-warning" href="/Liquers/Details?Id=${full.Id}">Alle gegevens</a>`; }
                     },
                     {
                         "render": function (data, type, full, meta)
                         {
                             if (full.SoftDeleted === false) {
-                                return '<a class="btn btn-danger" href="/Liquers/Disable?Id=' + full.Id + '">Zet uit</a>';
+                                return `<a class="btn btn-danger" href="/Liquers/Disable?Id=${full.Id}">Zet uit</a>`;
 
                             }
-                            else return '<a class="btn btn-success" href="/Liquers/Enable?Id=' + full.Id + '">Zet aan</a>';
+                            else return `<a class="btn btn-success" href="/Liquers/Enable?Id=${full.Id}">Zet aan</a>`;
                         }
                     },
                 ]

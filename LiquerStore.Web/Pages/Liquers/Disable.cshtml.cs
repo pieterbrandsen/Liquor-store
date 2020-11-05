@@ -38,23 +38,22 @@ namespace LiquerStore.Web.Pages.Liquers
             return Page();
         }
 
-        //public IActionResult OnPost(int? id)
-        //{
-        //    //if (id == null)
-        //    //{
-        //    //    return NotFound();
-        //    //}
+        public IActionResult OnPost(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    //WhiskyModel = await _db.Whiskies.FindAsync(id);
+            WhiskyModel = _db.GetWhiskyById(id);
 
-        //    //if (WhiskyModel != null)
-        //    //{
-        //    //    WhiskyModel.SoftDeleted = true;
-        //    //    _db.Whiskies.Update(WhiskyModel);
-        //    //    await _db.SaveChangesAsync();
-        //    //}
+            if (WhiskyModel != null)
+            {
+                WhiskyModel.SoftDeleted = true;
+                _db.UpdateWhiskyByModel(WhiskyModel);
+            }
 
-        //    //return RedirectToPage("./Index");
-        //}
+            return RedirectToPage("./Index");
+        }
     }
 }

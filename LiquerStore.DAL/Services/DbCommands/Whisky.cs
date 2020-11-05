@@ -43,7 +43,7 @@ namespace LiquerStore.DAL.Services.DbCommands
             db.Attach(whiskyModel).State = EntityState.Modified;
             db.Whiskies.Update(whiskyModel);
 
-                db.SaveChangesAsync();
+                db.SaveChanges();
         }
 
         public IList<WhiskyModel> GetAllWhiskies()
