@@ -30,9 +30,6 @@
                 @Html.DisplayNameFor(model => model.WhiskyModel[0].Kind)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel[0].Count)
-            </th>
-            <th>
                 Aanpassen
             </th>
             <th>
@@ -64,7 +61,6 @@
                     { "data": "ProductionArea", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].ProductionArea)" },
                     { "data": "AlcoholPercentage", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].AlcoholPercentage)" },
                     { "data": "Kind", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Kind)" },
-                    { "data": "Count", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Count)" },
                     {
                         "render": function (data, type, full, meta)
                         { return '<a class="btn btn-info" href="/Liquers/Edit?Id=' + full.Id + '">Aanpassen</a>'; }

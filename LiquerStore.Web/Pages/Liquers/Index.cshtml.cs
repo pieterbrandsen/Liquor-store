@@ -19,7 +19,7 @@ namespace LiquerStore.Web.Pages.Liquers
             _context = context;
         }
 
-        public IList<WhiskyModel> WhiskyModel { get;set; }
+        public IList<WhiskyModel> WhiskyModel { get; set; }
 
         public async Task OnGetAsync()
         {

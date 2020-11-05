@@ -7,12 +7,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LiquerStore.DAL
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
+        // All whisky storages
+        public DbSet<StorageModel> Storages { get; set; }
 
         // All whiskies
         public DbSet<WhiskyModel> Whiskies { get; set; }

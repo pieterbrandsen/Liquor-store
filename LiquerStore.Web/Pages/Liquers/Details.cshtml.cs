@@ -19,7 +19,7 @@ namespace LiquerStore.Web.Pages.Liquers
             _context = context;
         }
 
-        public WhiskyModel WhiskyModel { get; set; }
+        public StorageModel StorageModel { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,9 @@ namespace LiquerStore.Web.Pages.Liquers
                 return NotFound();
             }
 
-            WhiskyModel = await _context.Whiskies.FirstOrDefaultAsync(m => m.Id == id);
+            StorageModel = await _context.Storages.FirstOrDefaultAsync(m => m.Whisky.Id == id);
 
-            if (WhiskyModel == null)
+            if (StorageModel == null)
             {
                 return NotFound();
             }
