@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using LiquerStore.Web.Data;
 using LiquerStore.DAL.Models;
+using LiquerStore.DAL;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
     public class IndexModel : PageModel
     {
-        private readonly LiquerStore.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public IndexModel(LiquerStore.Web.Data.ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext context)
         {
             _context = context;
         }

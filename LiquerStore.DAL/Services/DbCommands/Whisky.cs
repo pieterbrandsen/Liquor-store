@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LiquerStore.DAL;
+
 
 namespace LiquerStore.DAL.Services.DbCommands
 {
@@ -11,7 +13,7 @@ namespace LiquerStore.DAL.Services.DbCommands
     {
         //public interface IWhisky
         //{
-        //    WhiskyModel GetWhiskyById(int id);
+        //    WhiskyModel GetWhiskyById(string id);
         //}
 
         //public class WhiskyService : IWhisky
@@ -23,9 +25,11 @@ namespace LiquerStore.DAL.Services.DbCommands
         //        this.db = db;
         //    }
 
-        //    public WhiskyModel GetWhiskyById(int id)
+        //    public WhiskyModel GetWhiskyById(string id)
         //    {
-        //        throw new NotImplementedException();
+        //        return from w in db.Whiskies
+        //               where w.Id == id
+        //               select w;
         //    }
         //}
     }

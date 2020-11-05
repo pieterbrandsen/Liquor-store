@@ -21,7 +21,7 @@ namespace LiquerStore.Web.Pages.Liquers
 
         public WhiskyModel WhiskyModel { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {

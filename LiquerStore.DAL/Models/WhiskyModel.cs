@@ -13,7 +13,7 @@ namespace LiquerStore.DAL.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
+        public int Id { get; set; }
         
         [Display(Name = "Naam")]
         public string Name { get; set; }

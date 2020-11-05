@@ -23,7 +23,7 @@ namespace LiquerStore.Web.Pages.Liquers
         [BindProperty]
         public WhiskyModel WhiskyModel { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
@@ -69,7 +69,7 @@ namespace LiquerStore.Web.Pages.Liquers
             return RedirectToPage("./Index");
         }
 
-        private bool WhiskyModelExists(string id)
+        private bool WhiskyModelExists(int id)
         {
             return _context.Whiskies.Any(e => e.Id == id);
         }

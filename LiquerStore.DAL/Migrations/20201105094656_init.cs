@@ -55,7 +55,8 @@ namespace LiquerStore.DAL.Migrations
                 name: "Whiskies",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Age = table.Column<int>(nullable: false),
                     ProductionArea = table.Column<string>(nullable: true),
