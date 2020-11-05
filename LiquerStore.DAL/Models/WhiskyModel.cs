@@ -32,6 +32,7 @@ namespace LiquerStore.DAL.Models
         [Display(Name = "Afbeelding locatie")]
         public string LabelPath { get; set; }
         [Display(Name = "Aantal")]
+        [NotMapped]
         public int Count { get; set; }
         public bool SoftDeleted { get; set; }
     }

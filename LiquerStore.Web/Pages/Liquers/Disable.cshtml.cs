@@ -6,30 +6,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using LiquerStore.DAL.Models;
-using LiquerStore.DAL;
+using LiquerStore.DAL.Services.DbCommands;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
     public class DisableModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IWhisky _db;
 
-        public DisableModel(ApplicationDbContext context)
+        public DisableModel(IWhisky db)
         {
-            _context = context;
+            _db = db;
         }
 
         [BindProperty]
         public WhiskyModel WhiskyModel { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            WhiskyModel = await _context.Whiskies.FirstOrDefaultAsync(m => m.Id == id);
+            WhiskyModel = _db.GetWhiskyById(id);
 
             if (WhiskyModel == null)
             {
@@ -38,23 +38,23 @@ namespace LiquerStore.Web.Pages.Liquers
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public IActionResult OnPost(int? id)
+        //{
+        //    //if (id == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
 
-            WhiskyModel = await _context.Whiskies.FindAsync(id);
+        //    //WhiskyModel = await _db.Whiskies.FindAsync(id);
 
-            if (WhiskyModel != null)
-            {
-                WhiskyModel.SoftDeleted = true;
-                _context.Whiskies.Update(WhiskyModel);
-                await _context.SaveChangesAsync();
-            }
+        //    //if (WhiskyModel != null)
+        //    //{
+        //    //    WhiskyModel.SoftDeleted = true;
+        //    //    _db.Whiskies.Update(WhiskyModel);
+        //    //    await _db.SaveChangesAsync();
+        //    //}
 
-            return RedirectToPage("./Index");
-        }
+        //    //return RedirectToPage("./Index");
+        //}
     }
 }

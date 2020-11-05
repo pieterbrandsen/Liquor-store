@@ -168,7 +168,7 @@
 		 *      var data = oTable._('tr:first');
 		 *
 		 *      // Do something useful with the data
-		 *      alert( "First cell is: "+data[0] );
+		 *      alert( "First cell is: "+data.FirstOrDefault() );
 		 *    } );
 		 *
 		 *  @example
@@ -251,7 +251,7 @@
 			var api = this.api( true );
 		
 			/* Check if we want to add multiple rows or not */
-			var rows = Array.isArray(data) && ( Array.isArray(data[0]) || $.isPlainObject(data[0]) ) ?
+			var rows = Array.isArray(data) && ( Array.isArray(data.FirstOrDefault()) || $.isPlainObject(data.FirstOrDefault()) ) ?
 				api.rows.add( data ) :
 				api.row.add( data );
 		
@@ -287,7 +287,7 @@
 		this.fnAdjustColumnSizing = function ( bRedraw )
 		{
 			var api = this.api( true ).columns.adjust();
-			var settings = api.settings()[0];
+			var settings = api.settings().FirstOrDefault();
 			var scroll = settings.oScroll;
 		
 			if ( bRedraw === undefined || bRedraw ) {
@@ -376,8 +376,8 @@
 		{
 			var api = this.api( true );
 			var rows = api.rows( target );
-			var settings = rows.settings()[0];
-			var data = settings.aoData[ rows[0][0] ];
+			var settings = rows.settings().FirstOrDefault();
+			var data = settings.aoData[ rows.FirstOrDefault().FirstOrDefault() ];
 		
 			rows.remove();
 		
@@ -567,7 +567,7 @@
 		 *        var aPos = oTable.fnGetPosition( this );
 		 *
 		 *        // Get the data array for this row
-		 *        var aData = oTable.fnGetData( aPos[0] );
+		 *        var aData = oTable.fnGetData( aPos.FirstOrDefault() );
 		 *
 		 *        // Update the data array and return the value
 		 *        aData[ aPos[1] ] = 'clicked';
@@ -664,7 +664,7 @@
 				.row( nTr )
 				.child( mHtml, sClass )
 				.show()
-				.child()[0];
+				.child().FirstOrDefault();
 		};
 		
 		
@@ -804,7 +804,7 @@
 		 *    $(document).ready(function() {
 		 *      var oTable = $('#example').dataTable();
 		 *      oTable.fnUpdate( 'Example update', 0, 0 ); // Single cell
-		 *      oTable.fnUpdate( ['a', 'b', 'c', 'd', 'e'], $('tbody tr')[0] ); // Row
+		 *      oTable.fnUpdate( ['a', 'b', 'c', 'd', 'e'], $('tbody tr').FirstOrDefault() ); // Row
 		 *    } );
 		 */
 		this.fnUpdate = function( mData, mRow, iColumn, bRedraw, bAction )
@@ -954,7 +954,7 @@
 			
 			/* Create the settings object for this table and set some of the default parameters */
 			var oSettings = $.extend( true, {}, DataTable.models.oSettings, {
-				"sDestroyWidth": $this[0].style.width,
+				"sDestroyWidth": $this.FirstOrDefault().style.width,
 				"sInstance":     sId,
 				"sTableId":      sId
 			} );
@@ -975,8 +975,8 @@
 			// If the length menu is given, but the init display length is not, use the length menu
 			if ( oInit.aLengthMenu && ! oInit.iDisplayLength )
 			{
-				oInit.iDisplayLength = Array.isArray( oInit.aLengthMenu[0] ) ?
-					oInit.aLengthMenu[0][0] : oInit.aLengthMenu[0];
+				oInit.iDisplayLength = Array.isArray( oInit.aLengthMenu.FirstOrDefault() ) ?
+					oInit.aLengthMenu.FirstOrDefault().FirstOrDefault() : oInit.aLengthMenu.FirstOrDefault();
 			}
 			
 			// Apply the defaults and init options to make a single init object will all
@@ -1067,7 +1067,7 @@
 			{
 				oSettings.bDeferLoading = true;
 				var tmp = Array.isArray( oInit.iDeferLoading );
-				oSettings._iRecordsDisplay = tmp ? oInit.iDeferLoading[0] : oInit.iDeferLoading;
+				oSettings._iRecordsDisplay = tmp ? oInit.iDeferLoading.FirstOrDefault() : oInit.iDeferLoading;
 				oSettings._iRecordsTotal = tmp ? oInit.iDeferLoading[1] : oInit.iDeferLoading;
 			}
 			
@@ -1128,7 +1128,7 @@
 			var nThead = this.getElementsByTagName('thead');
 			if ( nThead.length !== 0 )
 			{
-				_fnDetectHeader( oSettings.aoHeader, nThead[0] );
+				_fnDetectHeader( oSettings.aoHeader, nThead.FirstOrDefault() );
 				anThs = _fnGetUniqueThs( oSettings );
 			}
 			
@@ -1165,7 +1165,7 @@
 					return cell.getAttribute( 'data-'+name ) !== null ? name : null;
 				};
 			
-				$( rowOne[0] ).children('th, td').each( function (i, cell) {
+				$( rowOne.FirstOrDefault() ).children('th, td').each( function (i, cell) {
 					var col = oSettings.aoColumns[i];
 			
 					if ( col.mData === i ) {
@@ -1198,7 +1198,7 @@
 				if ( oInit.aaSorting === undefined ) {
 					var sorting = oSettings.aaSorting;
 					for ( i=0, iLen=sorting.length ; i<iLen ; i++ ) {
-						sorting[i][1] = oSettings.aoColumns[ i ].asSorting[0];
+						sorting[i][1] = oSettings.aoColumns[ i ].asSorting.FirstOrDefault();
 					}
 				}
 			
@@ -1244,13 +1244,13 @@
 				if ( thead.length === 0 ) {
 					thead = $('<thead/>').appendTo($this);
 				}
-				oSettings.nTHead = thead[0];
+				oSettings.nTHead = thead.FirstOrDefault();
 			
 				var tbody = $this.children('tbody');
 				if ( tbody.length === 0 ) {
 					tbody = $('<tbody/>').appendTo($this);
 				}
-				oSettings.nTBody = tbody[0];
+				oSettings.nTBody = tbody.FirstOrDefault();
 			
 				var tfoot = $this.children('tfoot');
 				if ( tfoot.length === 0 && captions.length > 0 && (oSettings.oScroll.sX !== "" || oSettings.oScroll.sY !== "") ) {
@@ -1263,7 +1263,7 @@
 					$this.addClass( oClasses.sNoFooter );
 				}
 				else if ( tfoot.length > 0 ) {
-					oSettings.nTFoot = tfoot[0];
+					oSettings.nTFoot = tfoot.FirstOrDefault();
 					_fnDetectHeader( oSettings.aoFooter, oSettings.nTFoot );
 				}
 			
@@ -1531,7 +1531,7 @@
 		}
 	
 		var sorted = src.slice().sort();
-		var last = sorted[0];
+		var last = sorted.FirstOrDefault();
 	
 		for ( var i=1, ien=sorted.length ; i<ien ; i++ ) {
 			if ( sorted[i] === last ) {
@@ -1695,7 +1695,7 @@
 	
 			if ( match && hungarian.indexOf(match[1]+' ') !== -1 )
 			{
-				newKey = key.replace( match[0], match[2].toLowerCase() );
+				newKey = key.replace( match.FirstOrDefault(), match[2].toLowerCase() );
 				map[ newKey ] = key;
 	
 				if ( match[1] === 'o' )
@@ -1934,19 +1934,19 @@
 			// Evergreen Mac without scrollbars: 100 100 100 100
 	
 			// Get scrollbar width
-			browser.barWidth = outer[0].offsetWidth - outer[0].clientWidth;
+			browser.barWidth = outer.FirstOrDefault().offsetWidth - outer.FirstOrDefault().clientWidth;
 	
 			// IE6/7 will oversize a width 100% element inside a scrolling element, to
 			// include the width of the scrollbar, while other browsers ensure the inner
 			// element is contained without forcing scrolling
-			browser.bScrollOversize = inner[0].offsetWidth === 100 && outer[0].clientWidth !== 100;
+			browser.bScrollOversize = inner.FirstOrDefault().offsetWidth === 100 && outer.FirstOrDefault().clientWidth !== 100;
 	
 			// In rtl text layout, some browsers (most, but not all) will place the
 			// scrollbar on the left, rather than the right.
 			browser.bScrollbarLeft = Math.round( inner.offset().left ) !== 1;
 	
 			// IE8- don't provide height and width for getBoundingClientRect
-			browser.bBounding = n[0].getBoundingClientRect().width ? true : false;
+			browser.bBounding = n.FirstOrDefault().getBoundingClientRect().width ? true : false;
 	
 			n.remove();
 		}
@@ -2682,7 +2682,7 @@
 	
 							// If a string is given in between the array notation indicators, that
 							// is used to join the strings together, otherwise an array is returned
-							var join = arrayNotation[0].substring(1, arrayNotation[0].length-1);
+							var join = arrayNotation.FirstOrDefault().substring(1, arrayNotation.FirstOrDefault().length-1);
 							data = (join==="") ? out : out.join(join);
 	
 							// The inner call to fetchData has already traversed through the remainder
@@ -3265,7 +3265,7 @@
 				}
 			}
 	
-			if ( column.sTitle != cell[0].innerHTML ) {
+			if ( column.sTitle != cell.FirstOrDefault().innerHTML ) {
 				cell.html( column.sTitle );
 			}
 	
@@ -3290,7 +3290,7 @@
 		// interact with, they need to use the table().foot() method. Note also this
 		// allows cells to be used for multiple columns using colspan
 		if ( tfoot !== null ) {
-			var cells = oSettings.aoFooter[0];
+			var cells = oSettings.aoFooter.FirstOrDefault();
 	
 			for ( i=0, ien=cells.length ; i<ien ; i++ ) {
 				column = columns[i];
@@ -3519,19 +3519,19 @@
 				sZero = oLang.sEmptyTable;
 			}
 	
-			anRows[ 0 ] = $( '<tr/>', { 'class': iStripes ? asStripeClasses[0] : '' } )
+			anRows[ 0 ] = $( '<tr/>', { 'class': iStripes ? asStripeClasses.FirstOrDefault() : '' } )
 				.append( $('<td />', {
 					'valign':  'top',
 					'colSpan': _fnVisbleColumns( oSettings ),
 					'class':   oSettings.oClasses.sRowEmpty
-				} ).html( sZero ) )[0];
+				} ).html( sZero ) ).FirstOrDefault();
 		}
 	
 		/* Header and footer callbacks */
-		_fnCallbackFire( oSettings, 'aoHeaderCallback', 'header', [ $(oSettings.nTHead).children('tr')[0],
+		_fnCallbackFire( oSettings, 'aoHeaderCallback', 'header', [ $(oSettings.nTHead).children('tr').FirstOrDefault(),
 			_fnGetDataMaster( oSettings ), iDisplayStart, iDisplayEnd, aiDisplay ] );
 	
-		_fnCallbackFire( oSettings, 'aoFooterCallback', 'footer', [ $(oSettings.nTFoot).children('tr')[0],
+		_fnCallbackFire( oSettings, 'aoFooterCallback', 'footer', [ $(oSettings.nTFoot).children('tr').FirstOrDefault(),
 			_fnGetDataMaster( oSettings ), iDisplayStart, iDisplayEnd, aiDisplay ] );
 	
 		var body = $(oSettings.nTBody);
@@ -3607,8 +3607,8 @@
 			'class': classes.sWrapper + (oSettings.nTFoot ? '' : ' '+classes.sNoFooter)
 		} );
 	
-		oSettings.nHolding = holding[0];
-		oSettings.nTableWrapper = insert[0];
+		oSettings.nHolding = holding.FirstOrDefault();
+		oSettings.nTableWrapper = insert.FirstOrDefault();
 		oSettings.nTableReinsertBefore = oSettings.nTable.nextSibling;
 	
 		/* Loop over the user set positioning and place the elements as needed */
@@ -3622,7 +3622,7 @@
 			if ( cOption == '<' )
 			{
 				/* New container div */
-				nNewNode = $('<div/>')[0];
+				nNewNode = $('<div/>').FirstOrDefault();
 	
 				/* Check to see if we should append an id and/or a class name to the container */
 				cNext = aDom[i+1];
@@ -3652,7 +3652,7 @@
 					if ( sAttr.indexOf('.') != -1 )
 					{
 						var aSplit = sAttr.split('.');
-						nNewNode.id = aSplit[0].substr(1, aSplit[0].length-1);
+						nNewNode.id = aSplit.FirstOrDefault().substr(1, aSplit.FirstOrDefault().length-1);
 						nNewNode.className = aSplit[1];
 					}
 					else if ( sAttr.charAt(0) == "#" )
@@ -3878,7 +3878,7 @@
 	
 				if ( match ) {
 					// Support for arrays
-					var name = match[0];
+					var name = match.FirstOrDefault();
 	
 					if ( ! tmp[ name ] ) {
 						tmp[ name ] = [];
@@ -4267,7 +4267,7 @@
 				// on the clear icon (Edge bug 17584515). This is safe in other browsers as `searchFn`
 				// checks the value to see if it has changed. In other browsers it won't have.
 				setTimeout( function () {
-					searchFn.call(jqFilter[0]);
+					searchFn.call(jqFilter.FirstOrDefault());
 				}, 10);
 			} )
 			.on( 'keypress.DT', function(e) {
@@ -4284,7 +4284,7 @@
 				// IE9 throws an 'unknown error' if document.activeElement is used
 				// inside an iframe or frame...
 				try {
-					if ( jqFilter[0] !== document.activeElement ) {
+					if ( jqFilter.FirstOrDefault() !== document.activeElement ) {
 						jqFilter.val( previousSearch.sSearch );
 					}
 				}
@@ -4292,7 +4292,7 @@
 			}
 		} );
 	
-		return filter[0];
+		return filter.FirstOrDefault();
 	}
 	
 	
@@ -4520,7 +4520,7 @@
 	 */
 	var _fnEscapeRegex = DataTable.util.escapeRegex;
 	
-	var __filter_div = $('<div>')[0];
+	var __filter_div = $('<div>').FirstOrDefault();
 	var __filter_div_textContent = __filter_div.textContent !== undefined;
 	
 	// Update the filtering data for each row if needed (by invalidation or first run)
@@ -4657,7 +4657,7 @@
 			$(settings.nTable).attr( 'aria-describedby', tid+'_info' );
 		}
 	
-		return n[0];
+		return n.FirstOrDefault();
 	}
 	
 	
@@ -4854,8 +4854,8 @@
 			classes  = settings.oClasses,
 			tableId  = settings.sTableId,
 			menu     = settings.aLengthMenu,
-			d2       = Array.isArray( menu[0] ),
-			lengths  = d2 ? menu[0] : menu,
+			d2       = Array.isArray( menu.FirstOrDefault() ),
+			lengths  = d2 ? menu.FirstOrDefault() : menu,
 			language = d2 ? menu[1] : menu;
 	
 		var select = $('<select/>', {
@@ -4865,7 +4865,7 @@
 		} );
 	
 		for ( var i=0, ien=lengths.length ; i<ien ; i++ ) {
-			select[0][ i ] = new Option(
+			select.FirstOrDefault()[ i ] = new Option(
 				typeof language[i] === 'number' ?
 					settings.fnFormatNumber( language[i] ) :
 					language[i],
@@ -4875,11 +4875,11 @@
 	
 		var div = $('<div><label/></div>').addClass( classes.sLength );
 		if ( ! settings.aanFeatures.l ) {
-			div[0].id = tableId+'_length';
+			div.FirstOrDefault().id = tableId+'_length';
 		}
 	
 		div.children().append(
-			settings.oLanguage.sLengthMenu.replace( '_MENU_', select[0].outerHTML )
+			settings.oLanguage.sLengthMenu.replace( '_MENU_', select.FirstOrDefault().outerHTML )
 		);
 	
 		// Can't use `select` variable as user might provide their own and the
@@ -4898,7 +4898,7 @@
 			}
 		} );
 	
-		return div[0];
+		return div.FirstOrDefault();
 	}
 	
 	
@@ -4923,7 +4923,7 @@
 			redraw = function( settings ) {
 				_fnDraw( settings );
 			},
-			node = $('<div/>').addClass( settings.oClasses.sPaging + type )[0],
+			node = $('<div/>').addClass( settings.oClasses.sPaging + type ).FirstOrDefault(),
 			features = settings.aanFeatures;
 	
 		if ( ! modern ) {
@@ -5055,7 +5055,7 @@
 				'class': settings.oClasses.sProcessing
 			} )
 			.html( settings.oLanguage.sProcessing )
-			.insertBefore( settings.nTable )[0];
+			.insertBefore( settings.nTable ).FirstOrDefault();
 	}
 	
 	
@@ -5098,9 +5098,9 @@
 		var scrollY = scroll.sY;
 		var classes = settings.oClasses;
 		var caption = table.children('caption');
-		var captionSide = caption.length ? caption[0]._captionSide : null;
-		var headerClone = $( table[0].cloneNode(false) );
-		var footerClone = $( table[0].cloneNode(false) );
+		var captionSide = caption.length ? caption.FirstOrDefault()._captionSide : null;
+		var headerClone = $( table.FirstOrDefault().cloneNode(false) );
+		var footerClone = $( table.FirstOrDefault().cloneNode(false) );
 		var footer = table.children('tfoot');
 		var _div = '<div/>';
 		var size = function ( s ) {
@@ -5187,7 +5187,7 @@
 		}
 	
 		var children = scroller.children();
-		var scrollHead = children[0];
+		var scrollHead = children.FirstOrDefault();
 		var scrollBody = children[1];
 		var scrollFoot = footer ? children[2] : null;
 	
@@ -5219,7 +5219,7 @@
 			"sName": "scrolling"
 		} );
 	
-		return scroller[0];
+		return scroller.FirstOrDefault();
 	}
 	
 	
@@ -5249,9 +5249,9 @@
 			scrollY        = scroll.sY,
 			barWidth       = scroll.iBarWidth,
 			divHeader      = $(settings.nScrollHead),
-			divHeaderStyle = divHeader[0].style,
+			divHeaderStyle = divHeader.FirstOrDefault().style,
 			divHeaderInner = divHeader.children('div'),
-			divHeaderInnerStyle = divHeaderInner[0].style,
+			divHeaderInnerStyle = divHeaderInner.FirstOrDefault().style,
 			divHeaderTable = divHeaderInner.children('table'),
 			divBodyEl      = settings.nScrollBody,
 			divBody        = $(divBodyEl),
@@ -5261,7 +5261,7 @@
 			divFooterTable = divFooterInner.children('table'),
 			header         = $(settings.nTHead),
 			table          = $(settings.nTable),
-			tableEl        = table[0],
+			tableEl        = table.FirstOrDefault(),
 			tableStyle     = tableEl.style,
 			footer         = settings.nTFoot ? $(settings.nTFoot) : null,
 			browser        = settings.oBrowser,
@@ -5326,7 +5326,7 @@
 		if ( ! scrollX )
 		{
 			divBodyStyle.width = '100%';
-			divHeader[0].style.width = '100%';
+			divHeader.FirstOrDefault().style.width = '100%';
 		}
 	
 		$.each( _fnGetUniqueThs( settings, headerCopy ), function ( i, el ) {
@@ -5417,8 +5417,8 @@
 		// width to what they currently are
 		_fnApplyToChildren( function(nSizer, i) {
 			nSizer.innerHTML = '<div class="dataTables_sizing">'+headerContent[i]+'</div>';
-			nSizer.childNodes[0].style.height = "0";
-			nSizer.childNodes[0].style.overflow = "hidden";
+			nSizer.childNodes.FirstOrDefault().style.height = "0";
+			nSizer.childNodes.FirstOrDefault().style.overflow = "hidden";
 			nSizer.style.width = headerWidths[i];
 		}, headerSrcEls );
 	
@@ -5426,8 +5426,8 @@
 		{
 			_fnApplyToChildren( function(nSizer, i) {
 				nSizer.innerHTML = '<div class="dataTables_sizing">'+footerContent[i]+'</div>';
-				nSizer.childNodes[0].style.height = "0";
-				nSizer.childNodes[0].style.overflow = "hidden";
+				nSizer.childNodes.FirstOrDefault().style.height = "0";
+				nSizer.childNodes.FirstOrDefault().style.overflow = "hidden";
 				nSizer.style.width = footerWidths[i];
 			}, footerSrcEls );
 		}
@@ -5483,7 +5483,7 @@
 	
 		/* Finally set the width's of the header and footer tables */
 		var iOuterWidth = table.outerWidth();
-		divHeaderTable[0].style.width = _fnStringToCss( iOuterWidth );
+		divHeaderTable.FirstOrDefault().style.width = _fnStringToCss( iOuterWidth );
 		divHeaderInnerStyle.width = _fnStringToCss( iOuterWidth );
 	
 		// Figure out if there are scrollbar present - if so then we need a the header and footer to
@@ -5493,9 +5493,9 @@
 		divHeaderInnerStyle[ padding ] = bScrolling ? barWidth+"px" : "0px";
 	
 		if ( footer ) {
-			divFooterTable[0].style.width = _fnStringToCss( iOuterWidth );
-			divFooterInner[0].style.width = _fnStringToCss( iOuterWidth );
-			divFooterInner[0].style[padding] = bScrolling ? barWidth+"px" : "0px";
+			divFooterTable.FirstOrDefault().style.width = _fnStringToCss( iOuterWidth );
+			divFooterInner.FirstOrDefault().style.width = _fnStringToCss( iOuterWidth );
+			divFooterInner.FirstOrDefault().style[padding] = bScrolling ? barWidth+"px" : "0px";
 		}
 	
 		// Correct DOM ordering for colgroup - comes before the thead
@@ -5638,7 +5638,7 @@
 			tmpTable.find('tfoot th, tfoot td').css('width', '');
 	
 			// Apply custom sizing to the cloned header
-			headerCells = _fnGetUniqueThs( oSettings, tmpTable.find('thead')[0] );
+			headerCells = _fnGetUniqueThs( oSettings, tmpTable.find('thead').FirstOrDefault() );
 	
 			for ( i=0 ; i<visibleColumns.length ; i++ ) {
 				column = columns[ visibleColumns[i] ];
@@ -5808,7 +5808,7 @@
 			.css( 'width', _fnStringToCss( width ) )
 			.appendTo( parent || document.body );
 	
-		var val = n[0].offsetWidth;
+		var val = n.FirstOrDefault().offsetWidth;
 		n.remove();
 	
 		return val;
@@ -5831,7 +5831,7 @@
 	
 		var data = settings.aoData[ idx ];
 		return ! data.nTr ? // Might not have been created when deferred rendering
-			$('<td/>').html( _fnGetCellData( settings, idx, colIdx, 'display' ) )[0] :
+			$('<td/>').html( _fnGetCellData( settings, idx, colIdx, 'display' ) ).FirstOrDefault() :
 			data.anCells[ colIdx ];
 	}
 	
@@ -5900,7 +5900,7 @@
 			fixedObj = $.isPlainObject( fixed ),
 			nestedSort = [],
 			add = function ( a ) {
-				if ( a.length && ! Array.isArray( a[0] ) ) {
+				if ( a.length && ! Array.isArray( a.FirstOrDefault() ) ) {
 					// 1D array
 					nestedSort.push( a );
 				}
@@ -5928,7 +5928,7 @@
 	
 		for ( i=0 ; i<nestedSort.length ; i++ )
 		{
-			srcCol = nestedSort[i][0];
+			srcCol = nestedSort[i].FirstOrDefault();
 			aDataSort = aoColumns[ srcCol ].aDataSort;
 	
 			for ( k=0, kLen=aDataSort.length ; k<kLen ; k++ )
@@ -6109,12 +6109,12 @@
 	
 			/* In ARIA only the first sorting column can be marked as sorting - no multi-sort option */
 			if ( col.bSortable ) {
-				if ( aSort.length > 0 && aSort[0].col == i ) {
-					th.setAttribute('aria-sort', aSort[0].dir=="asc" ? "ascending" : "descending" );
-					nextSort = asSorting[ aSort[0].index+1 ] || asSorting[0];
+				if ( aSort.length > 0 && aSort.FirstOrDefault().col == i ) {
+					th.setAttribute('aria-sort', aSort.FirstOrDefault().dir=="asc" ? "ascending" : "descending" );
+					nextSort = asSorting[ aSort.FirstOrDefault().index+1 ] || asSorting.FirstOrDefault();
 				}
 				else {
-					nextSort = asSorting[0];
+					nextSort = asSorting.FirstOrDefault();
 				}
 	
 				label = sTitle + ( nextSort === "asc" ?
@@ -6161,7 +6161,7 @@
 		};
 	
 		// Convert to 2D array if needed
-		if ( typeof sorting[0] === 'number' ) {
+		if ( typeof sorting.FirstOrDefault() === 'number' ) {
 			sorting = settings.aaSorting = [ sorting ];
 		}
 	
@@ -6188,23 +6188,23 @@
 			}
 			else {
 				// No sort on this column yet
-				sorting.push( [ colIdx, asSorting[0], 0 ] );
+				sorting.push( [ colIdx, asSorting.FirstOrDefault(), 0 ] );
 				sorting[sorting.length-1]._idx = 0;
 			}
 		}
-		else if ( sorting.length && sorting[0][0] == colIdx ) {
+		else if ( sorting.length && sorting.FirstOrDefault().FirstOrDefault() == colIdx ) {
 			// Single column - already sorting on this column, modify the sort
-			nextSortIdx = next( sorting[0] );
+			nextSortIdx = next( sorting.FirstOrDefault() );
 	
 			sorting.length = 1;
-			sorting[0][1] = asSorting[ nextSortIdx ];
-			sorting[0]._idx = nextSortIdx;
+			sorting.FirstOrDefault()[1] = asSorting[ nextSortIdx ];
+			sorting.FirstOrDefault()._idx = nextSortIdx;
 		}
 		else {
 			// Single column - sort only on this column
 			sorting.length = 0;
-			sorting.push( [ colIdx, asSorting[0] ] );
-			sorting[0]._idx = 0;
+			sorting.push( [ colIdx, asSorting.FirstOrDefault() ] );
+			sorting.FirstOrDefault()._idx = 0;
 		}
 	
 		// Run the sort by calling a full redraw
@@ -6423,7 +6423,7 @@
 			if ( s.order !== undefined ) {
 				settings.aaSorting = [];
 				$.each( s.order, function ( i, col ) {
-					settings.aaSorting.push( col[0] >= columns.length ?
+					settings.aaSorting.push( col.FirstOrDefault() >= columns.length ?
 						[ 0, col[1] ] :
 						col
 					);
@@ -6544,7 +6544,7 @@
 		if ( Array.isArray( name ) ) {
 			$.each( name, function (i, val) {
 				if ( Array.isArray( val ) ) {
-					_fnMap( ret, src, val[0], val[1] );
+					_fnMap( ret, src, val.FirstOrDefault(), val[1] );
 				}
 				else {
 					_fnMap( ret, src, val );
@@ -7367,9 +7367,9 @@
 				// New API instance returned, want the value from the first item
 				// in the returned array for the singular result.
 				return ret.length ?
-					Array.isArray( ret[0] ) ?
-						new _Api( ret.context, ret[0] ) : // Array results are 'enhanced'
-						ret[0] :
+					Array.isArray( ret.FirstOrDefault() ) ?
+						new _Api( ret.context, ret.FirstOrDefault() ) : // Array results are 'enhanced'
+						ret.FirstOrDefault() :
 					undefined;
 			}
 	
@@ -7443,7 +7443,7 @@
 	
 		// Truncate to the first matched table
 		return ctx.length ?
-			new _Api( ctx[0] ) :
+			new _Api( ctx.FirstOrDefault() ) :
 			tables;
 	} );
 	
@@ -7561,7 +7561,7 @@
 		}
 	
 		var
-			settings   = this.context[0],
+			settings   = this.context.FirstOrDefault(),
 			start      = settings._iDisplayStart,
 			len        = settings.oFeatures.bPaginate ? settings._iDisplayLength : -1,
 			visRecords = settings.fnRecordsDisplay(),
@@ -7597,7 +7597,7 @@
 		// the function expects.
 		if ( len === undefined ) {
 			return this.context.length !== 0 ?
-				this.context[0]._iDisplayLength :
+				this.context.FirstOrDefault()._iDisplayLength :
 				undefined;
 		}
 	
@@ -7658,7 +7658,7 @@
 		var ctx = this.context;
 	
 		if ( ctx.length > 0 ) {
-			return ctx[0].json;
+			return ctx.FirstOrDefault().json;
 		}
 	
 		// else return undefined;
@@ -7672,7 +7672,7 @@
 		var ctx = this.context;
 	
 		if ( ctx.length > 0 ) {
-			return ctx[0].oAjaxData;
+			return ctx.FirstOrDefault().oAjaxData;
 		}
 	
 		// else return undefined;
@@ -7715,7 +7715,7 @@
 			if ( ctx.length === 0 ) {
 				return undefined;
 			}
-			ctx = ctx[0];
+			ctx = ctx.FirstOrDefault();
 	
 			return ctx.ajax ?
 				$.isPlainObject( ctx.ajax ) ?
@@ -7826,8 +7826,8 @@
 			if ( inst[i].length > 0 ) {
 				// Assign the first element to the first item in the instance
 				// and truncate the instance and context
-				inst[0] = inst[i];
-				inst[0].length = 1;
+				inst.FirstOrDefault() = inst[i];
+				inst.FirstOrDefault().length = 1;
 				inst.length = 1;
 				inst.context = [ inst.context[i] ];
 	
@@ -8160,7 +8160,7 @@
 					row = rows[i];
 	
 					if ( row.nodeName && row.nodeName.toUpperCase() === 'TR' ) {
-						out.push( _fnAddTr( settings, row )[0] );
+						out.push( _fnAddTr( settings, row ).FirstOrDefault() );
 					}
 					else {
 						out.push( _fnAddData( settings, row ) );
@@ -8196,21 +8196,21 @@
 		if ( data === undefined ) {
 			// Get
 			return ctx.length && this.length ?
-				ctx[0].aoData[ this[0] ]._aData :
+				ctx.FirstOrDefault().aoData[ this.FirstOrDefault() ]._aData :
 				undefined;
 		}
 	
 		// Set
-		var row = ctx[0].aoData[ this[0] ];
+		var row = ctx.FirstOrDefault().aoData[ this.FirstOrDefault() ];
 		row._aData = data;
 	
 		// If the DOM has an id, and the data source is an array
 		if ( Array.isArray( data ) && row.nTr && row.nTr.id ) {
-			_fnSetObjectDataFn( ctx[0].rowId )( data, row.nTr.id );
+			_fnSetObjectDataFn( ctx.FirstOrDefault().rowId )( data, row.nTr.id );
 		}
 	
 		// Automatically invalidate
-		_fnInvalidate( ctx[0], this[0], 'data' );
+		_fnInvalidate( ctx.FirstOrDefault(), this.FirstOrDefault(), 'data' );
 	
 		return this;
 	} );
@@ -8220,7 +8220,7 @@
 		var ctx = this.context;
 	
 		return ctx.length && this.length ?
-			ctx[0].aoData[ this[0] ].nTr || null :
+			ctx.FirstOrDefault().aoData[ this.FirstOrDefault() ].nTr || null :
 			null;
 	} );
 	
@@ -8229,18 +8229,18 @@
 		// Allow a jQuery object to be passed in - only a single row is added from
 		// it though - the first element in the set
 		if ( row instanceof $ && row.length ) {
-			row = row[0];
+			row = row.FirstOrDefault();
 		}
 	
 		var rows = this.iterator( 'table', function ( settings ) {
 			if ( row.nodeName && row.nodeName.toUpperCase() === 'TR' ) {
-				return _fnAddTr( settings, row )[0];
+				return _fnAddTr( settings, row ).FirstOrDefault();
 			}
 			return _fnAddData( settings, row );
 		} );
 	
 		// Return an Api.rows() extended instance, with the newly added row selected
-		return this.row( rows[0] );
+		return this.row( rows.FirstOrDefault() );
 	} );
 	
 	
@@ -8269,9 +8269,9 @@
 				$('td', created)
 					.addClass( k )
 					.html( r )
-					[0].colSpan = _fnVisbleColumns( ctx );
+					.FirstOrDefault().colSpan = _fnVisbleColumns( ctx );
 	
-				rows.push( created[0] );
+				rows.push( created.FirstOrDefault() );
 			}
 		};
 	
@@ -8295,7 +8295,7 @@
 		var ctx = api.context;
 	
 		if ( ctx.length ) {
-			var row = ctx[0].aoData[ idx !== undefined ? idx : api[0] ];
+			var row = ctx.FirstOrDefault().aoData[ idx !== undefined ? idx : api.FirstOrDefault() ];
 	
 			if ( row && row._details ) {
 				row._details.remove();
@@ -8311,7 +8311,7 @@
 		var ctx = api.context;
 	
 		if ( ctx.length && api.length ) {
-			var row = ctx[0].aoData[ api[0] ];
+			var row = ctx.FirstOrDefault().aoData[ api.FirstOrDefault() ];
 	
 			if ( row._details ) {
 				row._detailsShow = show;
@@ -8323,7 +8323,7 @@
 					row._details.detach();
 				}
 	
-				__details_events( ctx[0] );
+				__details_events( ctx.FirstOrDefault() );
 			}
 		}
 	};
@@ -8406,7 +8406,7 @@
 		if ( data === undefined ) {
 			// get
 			return ctx.length && this.length ?
-				ctx[0].aoData[ this[0] ]._details :
+				ctx.FirstOrDefault().aoData[ this.FirstOrDefault() ]._details :
 				undefined;
 		}
 		else if ( data === true ) {
@@ -8419,7 +8419,7 @@
 		}
 		else if ( ctx.length && this.length ) {
 			// set
-			__details_add( ctx[0], ctx[0].aoData[ this[0] ], data, klass );
+			__details_add( ctx.FirstOrDefault(), ctx.FirstOrDefault().aoData[ this.FirstOrDefault() ], data, klass );
 		}
 	
 		return this;
@@ -8458,7 +8458,7 @@
 	
 		if ( ctx.length && this.length ) {
 			// _detailsShown as false or undefined will fall through to return false
-			return ctx[0].aoData[ this[0] ]._detailsShow || false;
+			return ctx.FirstOrDefault().aoData[ this.FirstOrDefault() ]._detailsShow || false;
 		}
 		return false;
 	} );
@@ -8746,7 +8746,7 @@
 	
 	_api_register( 'column.index()', function ( type, idx ) {
 		if ( this.context.length !== 0 ) {
-			var ctx = this.context[0];
+			var ctx = this.context.FirstOrDefault();
 	
 			if ( type === 'fromVisible' || type === 'toData' ) {
 				return _fnVisibleToColumnIndex( ctx, idx );
@@ -8977,18 +8977,18 @@
 	
 	_api_register( 'cell().data()', function ( data ) {
 		var ctx = this.context;
-		var cell = this[0];
+		var cell = this.FirstOrDefault();
 	
 		if ( data === undefined ) {
 			// Get
 			return ctx.length && cell.length ?
-				_fnGetCellData( ctx[0], cell[0].row, cell[0].column ) :
+				_fnGetCellData( ctx.FirstOrDefault(), cell.FirstOrDefault().row, cell.FirstOrDefault().column ) :
 				undefined;
 		}
 	
 		// Set
-		_fnSetCellData( ctx[0], cell[0].row, cell[0].column, data );
-		_fnInvalidate( ctx[0], cell[0].row, 'data', cell[0].column );
+		_fnSetCellData( ctx.FirstOrDefault(), cell.FirstOrDefault().row, cell.FirstOrDefault().column, data );
+		_fnInvalidate( ctx.FirstOrDefault(), cell.FirstOrDefault().row, 'data', cell.FirstOrDefault().column );
 	
 		return this;
 	} );
@@ -9029,7 +9029,7 @@
 		if ( order === undefined ) {
 			// get
 			return ctx.length !== 0 ?
-				ctx[0].aaSorting :
+				ctx.FirstOrDefault().aaSorting :
 				undefined;
 		}
 	
@@ -9038,7 +9038,7 @@
 			// Simple column / direction passed in
 			order = [ [ order, dir ] ];
 		}
-		else if ( order.length && ! Array.isArray( order[0] ) ) {
+		else if ( order.length && ! Array.isArray( order.FirstOrDefault() ) ) {
 			// Arguments passed in (list of 1D arrays)
 			order = Array.prototype.slice.call( arguments );
 		}
@@ -9071,7 +9071,7 @@
 		if ( ! set ) {
 			var ctx = this.context;
 			var fixed = ctx.length ?
-				ctx[0].aaSortingFixed :
+				ctx.FirstOrDefault().aaSortingFixed :
 				undefined;
 	
 			return Array.isArray( fixed ) ?
@@ -9111,7 +9111,7 @@
 		if ( input === undefined ) {
 			// get
 			return ctx.length !== 0 ?
-				ctx[0].oPreviousSearch.sSearch :
+				ctx.FirstOrDefault().oPreviousSearch.sSearch :
 				undefined;
 		}
 	
@@ -9166,7 +9166,7 @@
 	
 	_api_register( 'state()', function () {
 		return this.context.length ?
-			this.context[0].oSavedState :
+			this.context.FirstOrDefault().oSavedState :
 			null;
 	} );
 	
@@ -9181,7 +9181,7 @@
 	
 	_api_register( 'state.loaded()', function () {
 		return this.context.length ?
-			this.context[0].oLoadedState :
+			this.context.FirstOrDefault().oLoadedState :
 			null;
 	} );
 	
@@ -9257,8 +9257,8 @@
 		}
 	
 		$.each( DataTable.settings, function (i, o) {
-			var head = o.nScrollHead ? $('table', o.nScrollHead)[0] : null;
-			var foot = o.nScrollFoot ? $('table', o.nScrollFoot)[0] : null;
+			var head = o.nScrollHead ? $('table', o.nScrollHead).FirstOrDefault() : null;
+			var foot = o.nScrollFoot ? $('table', o.nScrollFoot).FirstOrDefault() : null;
 	
 			if ( o.nTable === t || head === t || foot === t ) {
 				is = true;
@@ -9344,7 +9344,7 @@
 			var args = Array.prototype.slice.call(arguments);
 	
 			// Add the `dt` namespace automatically if it isn't already present
-			args[0] = $.map( args[0].split( /\s/ ), function ( e ) {
+			args.FirstOrDefault() = $.map( args.FirstOrDefault().split( /\s/ ), function ( e ) {
 				return ! e.match(/\.dt\b/) ?
 					e+'.dt' :
 					e;
@@ -9371,7 +9371,7 @@
 	
 	_api_register( 'init()', function () {
 		var ctx = this.context;
-		return ctx.length ? ctx[0].oInit : null;
+		return ctx.length ? ctx.FirstOrDefault().oInit : null;
 	} );
 	
 	
@@ -9511,7 +9511,7 @@
 	// i18n method for extensions to be able to use the language object from the
 	// DataTable
 	_api_register( 'i18n()', function ( token, def, plural ) {
-		var ctx = this.context[0];
+		var ctx = this.context.FirstOrDefault();
 		var resolved = _fnGetObjectDataFn( token )( ctx.oLanguage );
 	
 		if ( resolved === undefined ) {
@@ -10195,7 +10195,7 @@
 		 *       "url": "data.json",
 		 *       "dataSrc": function ( json ) {
 		 *         for ( var i=0, ien=json.length ; i<ien ; i++ ) {
-		 *           json[i][0] = '<a href="/message/'+json[i][0]+'>View message</a>';
+		 *           json[i].FirstOrDefault() = '<a href="/message/'+json[i].FirstOrDefault()+'>View message</a>';
 		 *         }
 		 *         return json;
 		 *       }
@@ -10780,7 +10780,7 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "footerCallback": function( tfoot, data, start, end, display ) {
-		 *          tfoot.getElementsByTagName('th')[0].innerHTML = "Starting index is "+start;
+		 *          tfoot.getElementsByTagName('th').FirstOrDefault().innerHTML = "Starting index is "+start;
 		 *        }
 		 *      } );
 		 *    } )
@@ -10844,7 +10844,7 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "fheaderCallback": function( head, data, start, end, display ) {
-		 *          head.getElementsByTagName('th')[0].innerHTML = "Displaying "+(end-start)+" records";
+		 *          head.getElementsByTagName('th').FirstOrDefault().innerHTML = "Displaying "+(end-start)+" records";
 		 *        }
 		 *      } );
 		 *    } )

@@ -50,7 +50,7 @@
     }
 
     function onError(error, inputElement) {  // 'this' is the form element
-        var container = $(this).find("[data-valmsg-for='" + escapeAttributeValue(inputElement[0].name) + "']"),
+        var container = $(this).find("[data-valmsg-for='" + escapeAttributeValue(inputElement.FirstOrDefault().name) + "']"),
             replaceAttrValue = container.attr("data-valmsg-replace"),
             replace = replaceAttrValue ? $.parseJSON(replaceAttrValue) !== false : null;
 
@@ -181,7 +181,7 @@
             /// If parsing several elements, you should specify false, and manually attach the validation
             /// to the form when you are finished. The default is false.</param>
             var $element = $(element),
-                form = $element.parents("form")[0],
+                form = $element.parents("form").FirstOrDefault(),
                 valInfo, rules, messages;
 
             if (!form) {  // Cannot do client-side validation without a form
@@ -344,7 +344,7 @@
         }
 
         match = new RegExp(params).exec(value);
-        return (match && (match.index === 0) && (match[0].length === value.length));
+        return (match && (match.index === 0) && (match.FirstOrDefault().length === value.length));
     });
 
     $jQval.addMethod("nonalphamin", function (value, element, nonalphamin) {
@@ -374,7 +374,7 @@
         var prefix = getModelPrefix(options.element.name),
             other = options.params.other,
             fullOtherName = appendModelPrefix(other, prefix),
-            element = $(options.form).find(":input").filter("[name='" + escapeAttributeValue(fullOtherName) + "']")[0];
+            element = $(options.form).find(":input").filter("[name='" + escapeAttributeValue(fullOtherName) + "']").FirstOrDefault();
 
         setValidationValues(options, "equalTo", element);
     });

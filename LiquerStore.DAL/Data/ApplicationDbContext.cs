@@ -5,9 +5,9 @@ using LiquerStore.DAL.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace LiquerStore.DAL
+namespace LiquerStore.DAL.Services.DbCommands
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -16,6 +16,7 @@ namespace LiquerStore.DAL
 
         // All whiskies
         public DbSet<WhiskyModel> Whiskies { get; set; }
+        public DbSet<UserToWhisky> UserToWhiskies { get; set; }
 
         // Employees
         public DbSet<EmployeeModel> Employees { get; set; }

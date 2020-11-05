@@ -19,34 +19,34 @@
         var ret = -1, each;
         if (args.length === 0) { args = [{}]; }
         each = this.each(function () {
-            if ($.isPlainObject(args[0])) {
+            if ($.isPlainObject(args.FirstOrDefault())) {
                 if (this.datatable === undefined) {
-                    if (args[0].hasOwnProperty('lineFormat')) {
-                        args[0].lineFormat = _toJqueryFn (args[0].lineFormat, true);
+                    if (args.FirstOrDefault().hasOwnProperty('lineFormat')) {
+                        args.FirstOrDefault().lineFormat = _toJqueryFn (args.FirstOrDefault().lineFormat, true);
                     }
-                    if (args[0].hasOwnProperty('pagingPages')) {
-                        args[0].pagingPages = _toJqueryFn (args[0].pagingPages);
+                    if (args.FirstOrDefault().hasOwnProperty('pagingPages')) {
+                        args.FirstOrDefault().pagingPages = _toJqueryFn (args.FirstOrDefault().pagingPages);
                     }
-                    if (args[0].hasOwnProperty('filters')) {
-                        for (var i = 0 ; i < args[0].filters.length ; ++i) {
-                            var filter = args[0].filters[i] ;
+                    if (args.FirstOrDefault().hasOwnProperty('filters')) {
+                        for (var i = 0 ; i < args.FirstOrDefault().filters.length ; ++i) {
+                            var filter = args.FirstOrDefault().filters[i] ;
                             if (filter instanceof $) {
                                 filter = filter.get(0) ;
                             }
                             else if ((filter instanceof Object) && (filter.element instanceof $)) {
                                 filter.element = filter.element.get(0);
                             }
-                            args[0].filters[i] = filter;
+                            args.FirstOrDefault().filters[i] = filter;
                         }
                     }
-                    this.datatable = new DataTable(this, args[0]);
+                    this.datatable = new DataTable(this, args.FirstOrDefault());
                 }
                 else {
-                    this.datatable.setOptions(args[0]);
+                    this.datatable.setOptions(args.FirstOrDefault());
                 }
             }
-            else if (typeof args[0] === 'string') {
-                switch (args[0]) {
+            else if (typeof args.FirstOrDefault() === 'string') {
+                switch (args.FirstOrDefault()) {
                     case 'page':
                         if (1 in args) {
                             this.datatable.loadPage(parseInt(args[1]));

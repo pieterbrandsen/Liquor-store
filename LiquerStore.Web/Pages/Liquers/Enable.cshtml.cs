@@ -7,29 +7,30 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using LiquerStore.DAL.Models;
 using LiquerStore.DAL;
+using LiquerStore.DAL.Services.DbCommands;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
     public class EnableModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IWhisky _db;
 
-        public EnableModel(ApplicationDbContext context)
+        public EnableModel(IWhisky db)
         {
-            _context = context;
+            _db = db;
         }
 
         [BindProperty]
         public WhiskyModel WhiskyModel { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            WhiskyModel = await _context.Whiskies.FirstOrDefaultAsync(m => m.Id == id);
+            WhiskyModel = _db.GetWhiskyById(id);
 
             if (WhiskyModel == null)
             {
@@ -38,20 +39,19 @@ namespace LiquerStore.Web.Pages.Liquers
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id)
+        public IActionResult OnPost(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            WhiskyModel = await _context.Whiskies.FindAsync(id);
+            WhiskyModel = _db.GetWhiskyById(id);
 
             if (WhiskyModel != null)
             {
                 WhiskyModel.SoftDeleted = false;
-                _context.Whiskies.Update(WhiskyModel);
-                await _context.SaveChangesAsync();
+                _db.UpdateWhiskyByModel(WhiskyModel);
             }
 
             return RedirectToPage("./Index");

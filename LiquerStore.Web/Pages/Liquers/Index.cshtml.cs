@@ -6,24 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using LiquerStore.DAL.Models;
-using LiquerStore.DAL;
+using LiquerStore.DAL.Services.DbCommands;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IWhisky _db;
 
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(IWhisky db)
         {
-            _context = context;
+            _db = db;
         }
 
         public IList<WhiskyModel> WhiskyModel { get;set; }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            WhiskyModel = await _context.Whiskies.ToListAsync();
+            WhiskyModel = _db.GetAllWhiskies();
         }
     }
 }
