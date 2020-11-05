@@ -5,7 +5,7 @@ using LiquerStore.DAL.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace LiquerStore.Web.Data
+namespace LiquerStore.DAL
 {
     public class ApplicationDbContext : IdentityDbContext
     {

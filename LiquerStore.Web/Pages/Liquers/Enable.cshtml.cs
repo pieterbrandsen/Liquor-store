@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using LiquerStore.Web.Data;
 using LiquerStore.DAL.Models;
+using LiquerStore.DAL;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
@@ -14,7 +14,7 @@ namespace LiquerStore.Web.Pages.Liquers
     {
         private readonly ApplicationDbContext _context;
 
-        public EnableModel(LiquerStore.Web.Data.ApplicationDbContext context)
+        public EnableModel(ApplicationDbContext context)
         {
             _context = context;
         }

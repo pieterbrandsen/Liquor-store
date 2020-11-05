@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LiquerStore.Web.Data;
 using LiquerStore.DAL.Models;
+using LiquerStore.DAL;
 
 namespace LiquerStore.Web.Pages.Liquers
 {

@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using LiquerStore.Web.Data;
 using LiquerStore.DAL.Models;
+using LiquerStore.DAL;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
     public class CreateModel : PageModel
     {
-        private readonly LiquerStore.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public CreateModel(LiquerStore.Web.Data.ApplicationDbContext context)
+        public CreateModel(ApplicationDbContext context)
         {
             _context = context;
         }
