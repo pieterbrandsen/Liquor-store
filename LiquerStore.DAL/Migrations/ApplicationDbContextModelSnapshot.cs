@@ -4,16 +4,14 @@ using LiquerStore.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LiquerStore.Web.Data.Migrations
+namespace LiquerStore.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201103132729_age-type-switched")]
-    partial class agetypeswitched
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,8 +25,8 @@ namespace LiquerStore.Web.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<byte>("Age")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("AlcoholPercentage")
                         .HasColumnType("decimal(18,2)");
