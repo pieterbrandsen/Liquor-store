@@ -36,8 +36,13 @@ namespace LiquerStore.Web.Pages.Liquers
                 return Page();
             }
 
+<<<<<<< HEAD
+            _context.Whiskies.Add(WhiskyModel);
+            await _context.SaveChangesAsync();
+=======
             // Add the whisky to db
             _db.AddWhisky(WhiskyModel);
+>>>>>>> 6bc1b819e61852b14cac22341fe29c094497294f
 
             return RedirectToPage("./Index");
         }

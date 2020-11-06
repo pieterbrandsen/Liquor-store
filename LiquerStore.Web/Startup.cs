@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
+using LiquerStore.DAL.Models;
 
 namespace LiquerStore.Web
 {
@@ -31,7 +32,11 @@ namespace LiquerStore.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+<<<<<<< HEAD
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+=======
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+>>>>>>> 6bc1b819e61852b14cac22341fe29c094497294f
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             //services.RegisterWhiskeyServices();
