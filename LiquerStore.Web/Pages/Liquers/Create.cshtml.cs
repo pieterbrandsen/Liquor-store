@@ -12,9 +12,9 @@ namespace LiquerStore.Web.Pages.Liquers
 {
     public class CreateModel : PageModel
     {
-        private readonly IWhisky _db;
+        private readonly IStorage _db;
 
-        public CreateModel(IWhisky db)
+        public CreateModel(IStorage db)
         {
             _db = db;
         }
@@ -25,7 +25,7 @@ namespace LiquerStore.Web.Pages.Liquers
         }
 
         [BindProperty]
-        public WhiskyModel WhiskyModel { get; set; }
+        public StorageModel StorageModel { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -35,14 +35,9 @@ namespace LiquerStore.Web.Pages.Liquers
             {
                 return Page();
             }
-
-<<<<<<< HEAD
-            _context.Whiskies.Add(WhiskyModel);
-            await _context.SaveChangesAsync();
-=======
+            
             // Add the whisky to db
-            _db.AddWhisky(WhiskyModel);
->>>>>>> 6bc1b819e61852b14cac22341fe29c094497294f
+            _db.AddWhisky(StorageModel);
 
             return RedirectToPage("./Index");
         }

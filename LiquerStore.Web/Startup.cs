@@ -32,14 +32,9 @@ namespace LiquerStore.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-<<<<<<< HEAD
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-=======
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
->>>>>>> 6bc1b819e61852b14cac22341fe29c094497294f
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
-            //services.RegisterWhiskeyServices();
             services.RegisterWhiskeyServices();
         }
 

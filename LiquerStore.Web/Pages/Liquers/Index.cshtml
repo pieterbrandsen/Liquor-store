@@ -15,27 +15,21 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.First().Name)
+                @Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.First().Age)
+                @Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Age)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.First().ProductionArea)
+                @Html.DisplayNameFor(w => w.StorageModels.First().Whisky.ProductionArea)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.First().AlcoholPercentage)
+                @Html.DisplayNameFor(w => w.StorageModels.First().Whisky.AlcoholPercentage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WhiskyModel.First().Kind)
+                @Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Kind)
             </th>
             <th>
-<<<<<<< HEAD
-=======
-                @Html.DisplayNameFor(model => model.WhiskyModel.First().Count)
-            </th>
-            <th>
->>>>>>> 6bc1b819e61852b14cac22341fe29c094497294f
                 Aanpassen
             </th>
             <th>
@@ -56,26 +50,17 @@
     <script>
         $(document).ready(function () {
             $('#table').DataTable({
-                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.WhiskyModel)),
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.StorageModels)),
                 processing: true, // for show progress bar
                 serverSide: false, // for process server side
                 filter: true, // this is for disable filter (search box)
                 orderMulti: false, // for disable multiple column at once
                 columns: [
-<<<<<<< HEAD
-                    { "data": "Name", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Name)" },
-                    { "data": "Age", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Age)" },
-                    { "data": "ProductionArea", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].ProductionArea)" },
-                    { "data": "AlcoholPercentage", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].AlcoholPercentage)" },
-                    { "data": "Kind", "name": "@Html.DisplayNameFor(model => model.WhiskyModel[0].Kind)" },
-=======
-                    { "data": "Name", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().Name)" },
-                    { "data": "Age", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().Age)" },
-                    { "data": "ProductionArea", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().ProductionArea)" },
-                    { "data": "AlcoholPercentage", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().AlcoholPercentage)" },
-                    { "data": "Kind", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().Kind)" },
-                    { "data": "Count", "name": "@Html.DisplayNameFor(model => model.WhiskyModel.First().Count)" },
->>>>>>> 6bc1b819e61852b14cac22341fe29c094497294f
+                    { "data": "Name", "name": "@Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Name)" },
+                    { "data": "Age", "name": "@Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Age)" },
+                    { "data": "ProductionArea", "name": "@Html.DisplayNameFor(w => w.StorageModels.First().Whisky.ProductionArea)" },
+                    { "data": "AlcoholPercentage", "name": "@Html.DisplayNameFor(w => w.StorageModels.First().Whisky.AlcoholPercentage)" },
+                    { "data": "Kind", "name": "@Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Kind)" },
                     {
                         "render": function (data, type, full, meta)
                         { return `<a class="btn btn-info" href="/Liquers/Edit?Id=${full.Id}">Aanpassen</a>`; }

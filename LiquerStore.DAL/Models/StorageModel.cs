@@ -12,8 +12,9 @@ namespace LiquerStore.DAL.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public WhiskyModel Whisky { get; set; }
         public int Available { get; set; }
         public int Reserved { get; set; }
+        public int WhiskyId { get; set; }
+        public virtual WhiskyModel Whisky { get; set; }
     }
 }

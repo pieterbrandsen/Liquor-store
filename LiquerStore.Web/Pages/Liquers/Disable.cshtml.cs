@@ -12,9 +12,9 @@ namespace LiquerStore.Web.Pages.Liquers
 {
     public class DisableModel : PageModel
     {
-        private readonly IWhisky _db;
+        private readonly IStorage _db;
 
-        public DisableModel(IWhisky db)
+        public DisableModel(IStorage db)
         {
             _db = db;
         }
@@ -29,11 +29,7 @@ namespace LiquerStore.Web.Pages.Liquers
                 return NotFound();
             }
 
-<<<<<<< HEAD
-            StorageModel = await _context.Storages.FirstOrDefaultAsync(m => m.Whisky.Id == id);
-=======
-            WhiskyModel = _db.GetWhiskyById(id);
->>>>>>> 6bc1b819e61852b14cac22341fe29c094497294f
+            StorageModel = _db.GetWhiskyById(id);
 
             if (StorageModel == null)
             {
@@ -49,22 +45,12 @@ namespace LiquerStore.Web.Pages.Liquers
                 return NotFound();
             }
 
-<<<<<<< HEAD
-            StorageModel = await _context.Storages.FindAsync(id);
-=======
-            WhiskyModel = _db.GetWhiskyById(id);
->>>>>>> 6bc1b819e61852b14cac22341fe29c094497294f
+            StorageModel = _db.GetWhiskyById(id);
 
             if (StorageModel != null)
             {
-<<<<<<< HEAD
                 StorageModel.Whisky.SoftDeleted = true;
-                _context.Storages.Update(StorageModel);
-                await _context.SaveChangesAsync();
-=======
-                WhiskyModel.SoftDeleted = true;
-                _db.UpdateWhiskyByModel(WhiskyModel);
->>>>>>> 6bc1b819e61852b14cac22341fe29c094497294f
+                _db.UpdateWhiskyByModel(StorageModel);
             }
 
             return RedirectToPage("./Index");

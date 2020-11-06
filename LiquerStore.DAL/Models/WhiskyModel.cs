@@ -14,7 +14,7 @@ namespace LiquerStore.DAL.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        
+
         [Display(Name = "Naam")]
         public string Name { get; set; }
         
@@ -32,6 +32,9 @@ namespace LiquerStore.DAL.Models
         [Display(Name = "Afbeelding locatie")]
         public string LabelPath { get; set; }
         public bool SoftDeleted { get; set; }
+
+        public int StorageId { get; set; }
+        public virtual StorageModel Storages { get; set; }
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
