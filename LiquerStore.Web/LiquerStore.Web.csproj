@@ -24,4 +24,8 @@
     <ProjectReference Include="..\LiquerStore.DAL\LiquerStore.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Storage\" />
+  </ItemGroup>
+
 </Project>

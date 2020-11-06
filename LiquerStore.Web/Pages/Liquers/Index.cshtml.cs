@@ -19,7 +19,7 @@ namespace LiquerStore.Web.Pages.Liquers
             _db = db;
         }
 
-        public IList<WhiskyModel> WhiskyModel { get;set; }
+        public IList<WhiskyModel> WhiskyModel { get; set; }
 
         public void OnGet()
         {

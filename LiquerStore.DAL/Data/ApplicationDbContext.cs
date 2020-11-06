@@ -14,6 +14,9 @@ namespace LiquerStore.DAL.Services.DbCommands
         {
         }
 
+        // All whisky storages
+        public DbSet<StorageModel> Storages { get; set; }
+
         // All whiskies
         public DbSet<WhiskyModel> Whiskies { get; set; }
         public DbSet<UserToWhisky> UserToWhiskies { get; set; }
