@@ -48,7 +48,7 @@ namespace LiquerStore.DAL.Services.DbCommands
 
         public IList<StorageModel> GetAllWhiskies()
         {
-            return db.Storages.ToList();
+            return db.Storages.Include(s => s.Whisky).ToList();
             //return from s in db.Storages
             //orderby s.Whisky.Name
             //select s;
