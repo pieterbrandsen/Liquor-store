@@ -7,30 +7,30 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LiquerStore.DAL.Models;
-using LiquerStore.DAL;
+using LiquerStore.DAL.Services.DbCommands;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IWhisky _db;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(IWhisky db)
         {
-            _context = context;
+            _db = db;
         }
 
         [BindProperty]
         public WhiskyModel WhiskyModel { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            WhiskyModel = await _context.Whiskies.FirstOrDefaultAsync(m => m.Id == id);
+            WhiskyModel = _db.GetWhiskyById(id);
 
             if (WhiskyModel == null)
             {
@@ -41,37 +41,16 @@ namespace LiquerStore.Web.Pages.Liquers
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(WhiskyModel).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!WhiskyModelExists(WhiskyModel.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _db.UpdateWhiskyByModel(WhiskyModel);
 
             return RedirectToPage("./Index");
-        }
-
-        private bool WhiskyModelExists(int id)
-        {
-            return _context.Whiskies.Any(e => e.Id == id);
         }
     }
 }

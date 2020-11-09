@@ -167,8 +167,8 @@
       } // If multiple durations are defined, take the first
 
 
-      transitionDuration = transitionDuration.split(',')[0];
-      transitionDelay = transitionDelay.split(',')[0];
+      transitionDuration = transitionDuration.split(',').FirstOrDefault();
+      transitionDelay = transitionDelay.split(',').FirstOrDefault();
       return (parseFloat(transitionDuration) + parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
     },
     reflow: function reflow(element) {
@@ -182,7 +182,7 @@
       return Boolean(TRANSITION_END);
     },
     isElement: function isElement(obj) {
-      return (obj[0] || obj).nodeType;
+      return (obj.FirstOrDefault() || obj).nodeType;
     },
     typeCheckConfig: function typeCheckConfig(componentName, config, configTypes) {
       for (var property in configTypes) {
@@ -296,7 +296,7 @@
       }
 
       if (!parent) {
-        parent = $(element).closest("." + ClassName.ALERT)[0];
+        parent = $(element).closest("." + ClassName.ALERT).FirstOrDefault();
       }
 
       return parent;
@@ -436,7 +436,7 @@
     _proto.toggle = function toggle() {
       var triggerChangeEvent = true;
       var addAriaPressed = true;
-      var rootElement = $(this._element).closest(Selector$1.DATA_TOGGLE)[0];
+      var rootElement = $(this._element).closest(Selector$1.DATA_TOGGLE).FirstOrDefault();
 
       if (rootElement) {
         var input = this._element.querySelector(Selector$1.INPUT);
@@ -524,7 +524,7 @@
 
     Button._jQueryInterface.call($(button), 'toggle');
   }).on(Event$1.FOCUS_BLUR_DATA_API, Selector$1.DATA_TOGGLE_CARROT, function (event) {
-    var button = $(event.target).closest(Selector$1.BUTTON)[0];
+    var button = $(event.target).closest(Selector$1.BUTTON).FirstOrDefault();
     $(button).toggleClass(ClassName$1.FOCUS, /^focus(in)?$/.test(event.type));
   });
   /**
@@ -804,7 +804,7 @@
         if (_this3._pointerEvent && PointerType[event.originalEvent.pointerType.toUpperCase()]) {
           _this3.touchStartX = event.originalEvent.clientX;
         } else if (!_this3._pointerEvent) {
-          _this3.touchStartX = event.originalEvent.touches[0].clientX;
+          _this3.touchStartX = event.originalEvent.touches.FirstOrDefault().clientX;
         }
       };
 
@@ -813,7 +813,7 @@
         if (event.originalEvent.touches && event.originalEvent.touches.length > 1) {
           _this3.touchDeltaX = 0;
         } else {
-          _this3.touchDeltaX = event.originalEvent.touches[0].clientX - _this3.touchStartX;
+          _this3.touchDeltaX = event.originalEvent.touches.FirstOrDefault().clientX - _this3.touchStartX;
         }
       };
 
@@ -1073,7 +1073,7 @@
         return;
       }
 
-      var target = $(selector)[0];
+      var target = $(selector).FirstOrDefault();
 
       if (!target || !$(target).hasClass(ClassName$2.CAROUSEL)) {
         return;
@@ -1303,7 +1303,7 @@
         $(_this._element).trigger(Event$3.SHOWN);
       };
 
-      var capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
+      var capitalizedDimension = dimension.FirstOrDefault().toUpperCase() + dimension.slice(1);
       var scrollSize = "scroll" + capitalizedDimension;
       var transitionDuration = Util.getTransitionDurationFromElement(this._element);
       $(this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
@@ -1395,7 +1395,7 @@
         parent = this._config.parent; // It's a jQuery object
 
         if (typeof this._config.parent.jquery !== 'undefined') {
-          parent = this._config.parent[0];
+          parent = this._config.parent.FirstOrDefault();
         }
       } else {
         parent = document.querySelector(this._config.parent);
@@ -2223,7 +2223,7 @@
       return width >= popper.clientWidth && height >= popper.clientHeight;
     });
 
-    var computedPlacement = filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key;
+    var computedPlacement = filteredAreas.length > 0 ? filteredAreas.FirstOrDefault().key : sortedAreas.FirstOrDefault().key;
 
     var variation = placement.split('-')[1];
 
@@ -2291,7 +2291,7 @@
    * @returns {Object} popperOffsets - An object containing the offsets which will be applied to the popper
    */
   function getPopperOffsets(popper, referenceOffsets, placement) {
-    placement = placement.split('-')[0];
+    placement = placement.split('-').FirstOrDefault();
 
     // Get popper node sizes
     var popperRect = getOuterSizes(popper);
@@ -2335,7 +2335,7 @@
     }
 
     // use `filter` to obtain the same behavior of `find`
-    return arr.filter(check)[0];
+    return arr.filter(check).FirstOrDefault();
   }
 
   /**
@@ -2919,7 +2919,7 @@
       }
     }
 
-    var placement = data.placement.split('-')[0];
+    var placement = data.placement.split('-').FirstOrDefault();
     var _data$offsets = data.offsets,
         popper = _data$offsets.popper,
         reference = _data$offsets.reference;
@@ -3063,7 +3063,7 @@
 
     var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, options.boundariesElement, data.positionFixed);
 
-    var placement = data.placement.split('-')[0];
+    var placement = data.placement.split('-').FirstOrDefault();
     var placementOpposite = getOppositePlacement(placement);
     var variation = data.placement.split('-')[1] || '';
 
@@ -3088,7 +3088,7 @@
         return data;
       }
 
-      placement = data.placement.split('-')[0];
+      placement = data.placement.split('-').FirstOrDefault();
       placementOpposite = getOppositePlacement(placement);
 
       var popperOffsets = data.offsets.popper;
@@ -3145,7 +3145,7 @@
         popper = _data$offsets.popper,
         reference = _data$offsets.reference;
 
-    var placement = data.placement.split('-')[0];
+    var placement = data.placement.split('-').FirstOrDefault();
     var floor = Math.floor;
     var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
     var side = isVertical ? 'right' : 'bottom';
@@ -3253,7 +3253,7 @@
     // If divider is found, we divide the list of values and operands to divide
     // them by ofset X and Y.
     var splitRegex = /\s*,\s*|\s+/;
-    var ops = divider !== -1 ? [fragments.slice(0, divider).concat([fragments[divider].split(splitRegex)[0]]), [fragments[divider].split(splitRegex)[1]].concat(fragments.slice(divider + 1))] : [fragments];
+    var ops = divider !== -1 ? [fragments.slice(0, divider).concat([fragments[divider].split(splitRegex).FirstOrDefault()]), [fragments[divider].split(splitRegex)[1]].concat(fragments.slice(divider + 1))] : [fragments];
 
     // Convert the values with units to absolute pixels to allow our computations
     ops = ops.map(function (op, index) {
@@ -3309,7 +3309,7 @@
         popper = _data$offsets.popper,
         reference = _data$offsets.reference;
 
-    var basePlacement = placement.split('-')[0];
+    var basePlacement = placement.split('-').FirstOrDefault();
 
     var offsets = void 0;
     if (isNumeric(+offset)) {
@@ -3319,16 +3319,16 @@
     }
 
     if (basePlacement === 'left') {
-      popper.top += offsets[0];
+      popper.top += offsets.FirstOrDefault();
       popper.left -= offsets[1];
     } else if (basePlacement === 'right') {
-      popper.top += offsets[0];
+      popper.top += offsets.FirstOrDefault();
       popper.left += offsets[1];
     } else if (basePlacement === 'top') {
-      popper.left += offsets[0];
+      popper.left += offsets.FirstOrDefault();
       popper.top -= offsets[1];
     } else if (basePlacement === 'bottom') {
-      popper.left += offsets[0];
+      popper.left += offsets.FirstOrDefault();
       popper.top += offsets[1];
     }
 
@@ -3416,7 +3416,7 @@
    */
   function shift(data) {
     var placement = data.placement;
-    var basePlacement = placement.split('-')[0];
+    var basePlacement = placement.split('-').FirstOrDefault();
     var shiftvariation = placement.split('-')[1];
 
     // if shift shiftvariation is specified, run the modifier
@@ -3487,7 +3487,7 @@
    */
   function inner(data) {
     var placement = data.placement;
-    var basePlacement = placement.split('-')[0];
+    var basePlacement = placement.split('-').FirstOrDefault();
     var _data$offsets = data.offsets,
         popper = _data$offsets.popper,
         reference = _data$offsets.reference;
@@ -3960,8 +3960,8 @@
       };
 
       // get reference and popper elements (allow jQuery wrappers)
-      this.reference = reference && reference.jquery ? reference[0] : reference;
-      this.popper = popper && popper.jquery ? popper[0] : popper;
+      this.reference = reference && reference.jquery ? reference.FirstOrDefault() : reference;
+      this.popper = popper && popper.jquery ? popper.FirstOrDefault() : popper;
 
       // Deep merge modifiers options
       this.options.modifiers = {};
@@ -4223,7 +4223,7 @@
           referenceElement = this._config.reference; // Check if it's jQuery element
 
           if (typeof this._config.reference.jquery !== 'undefined') {
-            referenceElement = this._config.reference[0];
+            referenceElement = this._config.reference.FirstOrDefault();
           }
         } // If boundary is not `scrollParent`, then set position to `static`
         // to allow the menu to "escape" the scroll parent's boundaries
@@ -5668,7 +5668,7 @@
     };
 
     _proto.getTipElement = function getTipElement() {
-      this.tip = this.tip || $(this.config.template)[0];
+      this.tip = this.tip || $(this.config.template).FirstOrDefault();
       return this.tip;
     };
 
@@ -6099,7 +6099,7 @@
     };
 
     _proto.getTipElement = function getTipElement() {
-      this.tip = this.tip || $(this.config.template)[0];
+      this.tip = this.tip || $(this.config.template).FirstOrDefault();
       return this.tip;
     };
 
@@ -6324,9 +6324,9 @@
       }).filter(function (item) {
         return item;
       }).sort(function (a, b) {
-        return a[0] - b[0];
+        return a.FirstOrDefault() - b.FirstOrDefault();
       }).forEach(function (item) {
-        _this2._offsets.push(item[0]);
+        _this2._offsets.push(item.FirstOrDefault());
 
         _this2._targets.push(item[1]);
       });
@@ -6397,7 +6397,7 @@
         return;
       }
 
-      if (this._activeTarget && scrollTop < this._offsets[0] && this._offsets[0] > 0) {
+      if (this._activeTarget && scrollTop < this._offsets.FirstOrDefault() && this._offsets.FirstOrDefault() > 0) {
         this._activeTarget = null;
 
         this._clear();
@@ -6582,7 +6582,7 @@
 
       var target;
       var previous;
-      var listElement = $(this._element).closest(Selector$9.NAV_LIST_GROUP)[0];
+      var listElement = $(this._element).closest(Selector$9.NAV_LIST_GROUP).FirstOrDefault();
       var selector = Util.getSelectorFromElement(this._element);
 
       if (listElement) {
@@ -6642,7 +6642,7 @@
       var _this2 = this;
 
       var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? $(container).find(Selector$9.ACTIVE_UL) : $(container).children(Selector$9.ACTIVE);
-      var active = activeElements[0];
+      var active = activeElements.FirstOrDefault();
       var isTransitioning = callback && active && $(active).hasClass(ClassName$9.FADE);
 
       var complete = function complete() {
@@ -6660,7 +6660,7 @@
     _proto._transitionComplete = function _transitionComplete(element, active, callback) {
       if (active) {
         $(active).removeClass(ClassName$9.ACTIVE);
-        var dropdownChild = $(active.parentNode).find(Selector$9.DROPDOWN_ACTIVE_CHILD)[0];
+        var dropdownChild = $(active.parentNode).find(Selector$9.DROPDOWN_ACTIVE_CHILD).FirstOrDefault();
 
         if (dropdownChild) {
           $(dropdownChild).removeClass(ClassName$9.ACTIVE);
@@ -6684,7 +6684,7 @@
       }
 
       if (element.parentNode && $(element.parentNode).hasClass(ClassName$9.DROPDOWN_MENU)) {
-        var dropdownElement = $(element).closest(Selector$9.DROPDOWN)[0];
+        var dropdownElement = $(element).closest(Selector$9.DROPDOWN).FirstOrDefault();
 
         if (dropdownElement) {
           var dropdownToggleList = [].slice.call(dropdownElement.querySelectorAll(Selector$9.DROPDOWN_TOGGLE));
@@ -6982,14 +6982,14 @@
       throw new TypeError('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
     }
 
-    var version = $.fn.jquery.split(' ')[0].split('.');
+    var version = $.fn.jquery.split(' ').FirstOrDefault().split('.');
     var minMajor = 1;
     var ltMajor = 2;
     var minMinor = 9;
     var minPatch = 1;
     var maxMajor = 4;
 
-    if (version[0] < ltMajor && version[1] < minMinor || version[0] === minMajor && version[1] === minMinor && version[2] < minPatch || version[0] >= maxMajor) {
+    if (version.FirstOrDefault() < ltMajor && version[1] < minMinor || version.FirstOrDefault() === minMajor && version[1] === minMinor && version[2] < minPatch || version.FirstOrDefault() >= maxMajor) {
       throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0');
     }
   })();

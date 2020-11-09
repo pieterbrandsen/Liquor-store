@@ -950,7 +950,7 @@ $.validator.addMethod( "postcodeUK", function( value, element ) {
  * partnumber:	{require_from_group: [1,".productinfo"]},
  * description: {require_from_group: [1,".productinfo"]}
  *
- * options[0]: number of fields that must be filled in the group
+ * options.FirstOrDefault(): number of fields that must be filled in the group
  * options[1]: CSS selector that defines the group of conditionally required fields
  */
 $.validator.addMethod( "require_from_group", function( value, element, options ) {
@@ -992,7 +992,7 @@ $.validator.addMethod( "require_from_group", function( value, element, options )
  * description: {skip_or_fill_minimum: [2,".productinfo"]},
  * color:		{skip_or_fill_minimum: [2,".productinfo"]}
  *
- * options[0]: number of fields that must be filled in the group
+ * options.FirstOrDefault(): number of fields that must be filled in the group
  * options[1]: CSS selector that defines the group of conditionally required fields
  *
  */

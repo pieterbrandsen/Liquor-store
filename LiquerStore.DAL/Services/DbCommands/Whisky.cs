@@ -1,36 +1,62 @@
 ﻿using LiquerStore.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LiquerStore.DAL;
-
 
 namespace LiquerStore.DAL.Services.DbCommands
 {
-    class Whisky
+    public interface IWhisky
     {
-        //public interface IWhisky
-        //{
-        //    WhiskyModel GetWhiskyById(string id);
-        //}
+        WhiskyModel GetWhiskyById(int? id);
+        void AddWhisky(WhiskyModel whiskyModel);
+            void UpdateWhiskyByModel(WhiskyModel whiskyModel);
+        IList<WhiskyModel> GetAllWhiskies();
+        int GetAllWhiskieStockById(int? id);
+    }
+    public class WhiskyService : IWhisky
+    {
+        private ApplicationDbContext db;
 
-        //public class WhiskyService : IWhisky
-        //{
-        //    ApplicationDbContext db;
+        public WhiskyService(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
 
-        //    public WhiskyService(ApplicationDbContext db)
-        //    {
-        //        this.db = db;
-        //    }
+        public WhiskyModel GetWhiskyById(int? id)
+        {
+            // Get a whisky based on id
+            return db.Whiskies.FirstOrDefault(r => r.Id == id);
+        }
 
-        //    public WhiskyModel GetWhiskyById(string id)
-        //    {
-        //        return from w in db.Whiskies
-        //               where w.Id == id
-        //               select w;
-        //    }
-        //}
+        public void AddWhisky(WhiskyModel whiskyModel)
+        {
+            // Add a whisky to the db
+            db.Whiskies.Add(whiskyModel);
+            db.SaveChanges();
+        }
+
+        public void UpdateWhiskyByModel(WhiskyModel whiskyModel)
+        {
+            db.Attach(whiskyModel).State = EntityState.Modified;
+            db.Whiskies.Update(whiskyModel);
+
+                db.SaveChanges();
+        }
+
+        public IList<WhiskyModel> GetAllWhiskies()
+        {
+            return db.Whiskies.ToList();
+        }
+
+        public int GetAllWhiskieStockById(int? id)
+        {
+            var currentStock = from w in db.UserToWhiskies
+                   where w.WhiskyId == id
+                   select w;
+            return currentStock.Count();
+        }
     }
 }

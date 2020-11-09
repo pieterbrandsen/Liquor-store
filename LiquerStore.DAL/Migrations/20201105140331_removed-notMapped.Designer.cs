@@ -10,13 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiquerStore.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<< HEAD:LiquerStore.DAL/Migrations/20201105144533_init.Designer.cs
-    [Migration("20201105144533_init")]
-    partial class init
-=======
-    [Migration("20201105135003_added-UserToWhisky")]
-    partial class addedUserToWhisky
->>>>>>> f8424098af65e63b07d0668327b3a36922349797:LiquerStore.DAL/Migrations/20201105135003_added-UserToWhisky.Designer.cs
+    [Migration("20201105140331_removed-notMapped")]
+    partial class removednotMapped
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,29 +104,6 @@ namespace LiquerStore.DAL.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
                 });
 
-<<<<<<< HEAD:LiquerStore.DAL/Migrations/20201105144533_init.Designer.cs
-            modelBuilder.Entity("LiquerStore.DAL.Models.StorageModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Available")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Reserved")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WhiskyId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WhiskyId");
-
-                    b.ToTable("Storages");
-=======
             modelBuilder.Entity("LiquerStore.DAL.Models.UserToWhisky", b =>
                 {
                     b.Property<string>("UserId")
@@ -146,7 +118,6 @@ namespace LiquerStore.DAL.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("UserToWhiskies");
->>>>>>> f8424098af65e63b07d0668327b3a36922349797:LiquerStore.DAL/Migrations/20201105135003_added-UserToWhisky.Designer.cs
                 });
 
             modelBuilder.Entity("LiquerStore.DAL.Models.WhiskyModel", b =>
@@ -161,6 +132,9 @@ namespace LiquerStore.DAL.Migrations
 
                     b.Property<decimal>("AlcoholPercentage")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
                     b.Property<int>("Kind")
                         .HasColumnType("int");
@@ -329,13 +303,6 @@ namespace LiquerStore.DAL.Migrations
                     b.HasBaseType("LiquerStore.DAL.Models.ApplicationUser");
 
                     b.HasDiscriminator().HasValue("EmployeeModel");
-                });
-
-            modelBuilder.Entity("LiquerStore.DAL.Models.StorageModel", b =>
-                {
-                    b.HasOne("LiquerStore.DAL.Models.WhiskyModel", "Whisky")
-                        .WithMany()
-                        .HasForeignKey("WhiskyId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

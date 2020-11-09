@@ -25,7 +25,7 @@ var DataTable = function (table, opts) {
 
     /* If nb columns not specified, count the number of column from thead. */
     if (this.options.nbColumns < 0) {
-        this.options.nbColumns = this.table.tHead.rows[0].cells.length;
+        this.options.nbColumns = this.table.tHead.rows.FirstOrDefault().cells.length;
     }
 
     /* Create the base for pagination. */
@@ -48,7 +48,7 @@ var DataTable = function (table, opts) {
 
     if (!this.table.tHead) {
         this.table.tHead = document.createElement('thead');
-        this.table.appendChild(this.table.rows[0]);
+        this.table.appendChild(this.table.rows.FirstOrDefault());
     }
 
     /* Compatibility issue (forceStrings => No defined data types). */
@@ -56,10 +56,10 @@ var DataTable = function (table, opts) {
         this.options.dataTypes = false ;
     }
 
-    var ths = this.table.tHead.rows[0].cells ;
+    var ths = this.table.tHead.rows.FirstOrDefault().cells ;
 
-    if (!this.table.tBodies[0]) {
-        this.table.tBodies[0] = document.createElement('tbody');
+    if (!this.table.tBodies.FirstOrDefault()) {
+        this.table.tBodies.FirstOrDefault() = document.createElement('tbody');
     }
 
     if (this.options.data instanceof Array) {
@@ -99,10 +99,10 @@ var DataTable = function (table, opts) {
             }
         }
     }
-    else if (this.table.tBodies[0].rows.length > 0) {
+    else if (this.table.tBodies.FirstOrDefault().rows.length > 0) {
         this.data = [];
-        var rows = this.table.tBodies[0].rows;
-        var nCols = rows[0].cells.length ;
+        var rows = this.table.tBodies.FirstOrDefault().rows;
+        var nCols = rows.FirstOrDefault().cells.length ;
         for (var i = 0; i < rows.length; ++i) {
             this.data.push ([]) ;
         }
@@ -136,7 +136,7 @@ var DataTable = function (table, opts) {
             }
         }
         if (this.options.dataTypes === true) {
-            for (var c = 0; c < this.data[0].length; ++c) {
+            for (var c = 0; c < this.data.FirstOrDefault().length; ++c) {
                 var isNumeric = true;
                 for (var i = 0; i < this.data.length; ++i) {
                     if (this.data[i][c] !== ""
@@ -437,7 +437,7 @@ DataTable.prototype = {
             this.pagingLists[i].innerHTML = '';
             childs.forEach(function (e) {
                 if (e.childNodes.length > 0) {
-                    e.childNodes[0].addEventListener('click', function () {
+                    e.childNodes.FirstOrDefault().addEventListener('click', function () {
                         if (this.parentNode.classList.contains('active') ||
                             typeof this.dataset.page === 'undefined') {
                             return;
@@ -500,7 +500,7 @@ DataTable.prototype = {
         if (this.options.sort instanceof Function) {
             return this.options.sort;
         }
-        if (this.data.length === 0 || !(this.options.sortKey in this.data[0])) {
+        if (this.data.length === 0 || !(this.options.sortKey in this.data.FirstOrDefault())) {
             return false;
         }
         var key = this.options.sortKey;
@@ -809,7 +809,7 @@ DataTable.prototype = {
         this.filterVals = [];
         // Speical options if '*'
         if (this.options.filters === '*') {
-            var nThs = this.table.tHead.rows[0].cells.length;
+            var nThs = this.table.tHead.rows.FirstOrDefault().cells.length;
             this.options.filters = [];
             while (nThs--) {
                 this.options.filters.push(true);
@@ -876,7 +876,7 @@ DataTable.prototype = {
         if (this.options.filterSelectOptions && this.filterIndex.length > 0) {
             var dtable = this;
             var allKeys = [];
-            for (var j = 0; j < this.data[0].length; ++j) {
+            for (var j = 0; j < this.data.FirstOrDefault().length; ++j) {
                 allKeys.push({});
             }
             for (var i = 0; i < this.filterIndex.length; ++i) {
@@ -934,11 +934,11 @@ DataTable.prototype = {
                     dtable.filterVals[field] = [e.dataset['default']];
                 }
                 else if (e.childNodes.length > 0) {
-                    e.childNodes[0].selected = true;
+                    e.childNodes.FirstOrDefault().selected = true;
                     for (var i = 1; i < e.childNodes.length; ++i) {
                         e.childNodes[i].selected = false;
                     }
-                    if (e.childNodes[0].dataset.empty) {
+                    if (e.childNodes.FirstOrDefault().dataset.empty) {
                         var allKeys = [];
                         for (var i = 1; i < e.childNodes.length; ++i) {
                             allKeys.push(e.childNodes[i].value);
@@ -946,7 +946,7 @@ DataTable.prototype = {
                         dtable.filterVals[field] = allKeys;
                     }
                     else {
-                        dtable.filterVals[field] = [e.childNodes[0].value];
+                        dtable.filterVals[field] = [e.childNodes.FirstOrDefault().value];
                     }
                 }
             }
@@ -981,7 +981,7 @@ DataTable.prototype = {
     checkFilter: function (data) {
         var ok = true;
         for (var fk in this.filters) {
-            var currentData = fk[0] === '_' ? data : data[fk];
+            var currentData = fk.FirstOrDefault() === '_' ? data : data[fk];
             if (typeof currentData === "string") {
                 currentData = this.stripTags(currentData);
             }
@@ -1053,7 +1053,7 @@ DataTable.prototype = {
         if (!(this.options.sort instanceof Function)) {
 
             var countTH = 0;
-            var ths = this.table.tHead.rows[0].cells;
+            var ths = this.table.tHead.rows.FirstOrDefault().cells;
             for (var i = 0; i < ths.length; ++i) {
 
                 if (ths[i].dataset.sort) {
@@ -1125,7 +1125,7 @@ DataTable.prototype = {
             this.refresh();
         }
         else if (this.options.sortKey !== false) {
-            var ths = this.table.tHead.rows[0].cells;
+            var ths = this.table.tHead.rows.FirstOrDefault().cells;
             var th;
             for (var j = 0; j < ths.length; j++) {
                 ths[j].classList.remove('sorting-desc');
@@ -1401,9 +1401,9 @@ DataTable.prototype = {
         this.options.beforeRefresh.call(this.table);
         this.updatePaging();
         this.updateCounter();
-        this.table.tBodies[0].innerHTML = "";
+        this.table.tBodies.FirstOrDefault().innerHTML = "";
         if (this.currentStart >= this.currentDataLength) {
-            this.table.tBodies[0].innerHTML = '<tr><td colspan="' + this.options.nbColumns + '">'
+            this.table.tBodies.FirstOrDefault().innerHTML = '<tr><td colspan="' + this.options.nbColumns + '">'
                 + '<div class="progress progress-striped active">'
                 + '<div class="bar" style="width: 100%;"></div>'
                 + '</div></div></tr>';
@@ -1414,7 +1414,7 @@ DataTable.prototype = {
              i++) {
             var index = this.filterIndex[this.currentStart + i];
             var data  = this.data[index];
-            this.table.tBodies[0].appendChild(this.options.lineFormat.call(this.table,
+            this.table.tBodies.FirstOrDefault().appendChild(this.options.lineFormat.call(this.table,
                                                                            index, data));
         }
         this.options.afterRefresh.call(this.table);
@@ -1502,12 +1502,12 @@ DataTable.prototype = {
         }
         this.destroyFilter();
         this.table.classList.remove(this.options.tableClass);
-        this.removeNode(this.table.tBodies[0]);
+        this.removeNode(this.table.tBodies.FirstOrDefault());
         this.table.appendChild(document.createElement('tbody'));
         for (var i = 0; i < this.data.length; i++) {
             var index = this.filterIndex[this.currentStart + i];
             var data  = this.data[index];
-            this.table.tBodies[0].appendChild(this.options.lineFormat.call(this.table,
+            this.table.tBodies.FirstOrDefault().appendChild(this.options.lineFormat.call(this.table,
                                                                            index, data));
         }
 
