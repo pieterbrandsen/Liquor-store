@@ -46,7 +46,7 @@ namespace LiquerStore.DAL.Services.DbCommands
                 db.SaveChanges();
         }
 
-        public IEnumerable<WhiskyModel> GetAllWhiskies()
+        public IEnumerable<StorageModel> GetAllWhiskies()
         {
             return db.Storages.ToList();
         }
