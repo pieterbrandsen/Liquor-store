@@ -13,7 +13,7 @@ namespace LiquerStore.DAL.Services.DbCommands
         StorageModel GetWhiskyById(int? id);
         void AddWhisky(StorageModel StorageModel);
             void UpdateWhiskyByModel(StorageModel StorageModel);
-        IEnumerable<StorageModel> GetAllWhiskies();
+        IList<StorageModel> GetAllWhiskies();
         //int GetAllWhiskieStockById(int? id);
     }
     public class StorageService : IStorage
@@ -46,9 +46,12 @@ namespace LiquerStore.DAL.Services.DbCommands
                 db.SaveChanges();
         }
 
-        public IEnumerable<StorageModel> GetAllWhiskies()
+        public IList<StorageModel> GetAllWhiskies()
         {
             return db.Storages.ToList();
+            //return from s in db.Storages
+            //orderby s.Whisky.Name
+            //select s;
         }
 
         //public int GetAllWhiskieStockById(int? id)

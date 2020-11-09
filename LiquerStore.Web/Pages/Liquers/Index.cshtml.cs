@@ -19,7 +19,7 @@ namespace LiquerStore.Web.Pages.Liquers
             _db = db;
         }
 
-        public IEnumerable<StorageModel> StorageModels { get; set; }
+        public IList<StorageModel> StorageModels { get; set; }
 
         public void OnGet()
         {
