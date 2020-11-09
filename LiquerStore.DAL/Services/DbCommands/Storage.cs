@@ -28,7 +28,7 @@ namespace LiquerStore.DAL.Services.DbCommands
         public StorageModel GetWhiskyById(int? id)
         {
             // Get a whisky based on id
-            return db.Storages.FirstOrDefault(r => r.Id == id);
+            return db.Storages.Include(s => s.Whisky).FirstOrDefault(r => r.Id == id);
         }
 
         public void AddWhisky(StorageModel StorageModel)
