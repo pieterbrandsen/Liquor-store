@@ -32,9 +32,6 @@ namespace LiquerStore.DAL.Models
         [Display(Name = "Afbeelding locatie")]
         public string LabelPath { get; set; }
         public bool SoftDeleted { get; set; }
-
-        public int StorageId { get; set; }
-        public virtual StorageModel Storages { get; set; }
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
