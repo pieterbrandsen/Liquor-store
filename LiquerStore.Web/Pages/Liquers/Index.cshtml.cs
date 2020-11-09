@@ -12,18 +12,18 @@ namespace LiquerStore.Web.Pages.Liquers
 {
     public class IndexModel : PageModel
     {
-        private readonly IWhisky _db;
+        private readonly IStorage _db;
 
-        public IndexModel(IWhisky db)
+        public IndexModel(IStorage db)
         {
             _db = db;
         }
 
-        public IList<WhiskyModel> WhiskyModel { get;set; }
+        public IList<StorageModel> StorageModels { get; set; }
 
         public void OnGet()
         {
-            WhiskyModel = _db.GetAllWhiskies();
+            StorageModels = _db.GetAllWhiskies();
         }
     }
 }

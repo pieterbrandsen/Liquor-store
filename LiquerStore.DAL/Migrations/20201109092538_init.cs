@@ -40,35 +40,15 @@ namespace LiquerStore.DAL.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     HomeTown = table.Column<string>(nullable: true),
-                    Age = table.Column<DateTime>(nullable: true)
+                    Age = table.Column<DateTime>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Whiskies",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Age = table.Column<int>(nullable: false),
-                    ProductionArea = table.Column<string>(nullable: true),
-                    AlcoholPercentage = table.Column<decimal>(nullable: false),
-                    Kind = table.Column<int>(nullable: false),
-                    LabelPath = table.Column<string>(nullable: true),
-                    Count = table.Column<int>(nullable: false),
-                    SoftDeleted = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Whiskies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,6 +157,48 @@ namespace LiquerStore.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Whiskies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: false),
+                    ProductionArea = table.Column<string>(nullable: true),
+                    AlcoholPercentage = table.Column<decimal>(nullable: false),
+                    Kind = table.Column<int>(nullable: false),
+                    LabelPath = table.Column<string>(nullable: true),
+                    SoftDeleted = table.Column<bool>(nullable: false),
+                    StorageId = table.Column<int>(nullable: false),
+                    StoragesId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Whiskies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Storages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Available = table.Column<int>(nullable: false),
+                    Reserved = table.Column<int>(nullable: false),
+                    WhiskyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Storages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Storages_Whiskies_WhiskyId",
+                        column: x => x.WhiskyId,
+                        principalTable: "Whiskies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -215,10 +237,39 @@ namespace LiquerStore.DAL.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Storages_WhiskyId",
+                table: "Storages",
+                column: "WhiskyId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Whiskies_StorageId",
+                table: "Whiskies",
+                column: "StorageId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Whiskies_StoragesId",
+                table: "Whiskies",
+                column: "StoragesId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Whiskies_Storages_StoragesId",
+                table: "Whiskies",
+                column: "StoragesId",
+                principalTable: "Storages",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Storages_Whiskies_WhiskyId",
+                table: "Storages");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -235,13 +286,16 @@ namespace LiquerStore.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Whiskies");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Whiskies");
+
+            migrationBuilder.DropTable(
+                name: "Storages");
         }
     }
 }
