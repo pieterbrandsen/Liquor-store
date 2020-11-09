@@ -56,27 +56,48 @@
                 filter: true, // this is for disable filter (search box)
                 orderMulti: false, // for disable multiple column at once
                 columns: [
-                    { "data": "Name", "name": "@Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Name)" },
-                    { "data": "Age", "name": "@Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Age)" },
-                    { "data": "ProductionArea", "name": "@Html.DisplayNameFor(w => w.StorageModels.First().Whisky.ProductionArea)" },
-                    { "data": "AlcoholPercentage", "name": "@Html.DisplayNameFor(w => w.StorageModels.First().Whisky.AlcoholPercentage)" },
-                    { "data": "Kind", "name": "@Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Kind)" },
                     {
-                        "render": function (data, type, full, meta)
-                        { return `<a class="btn btn-info" href="/Liquers/Edit?Id=${full.Id}">Aanpassen</a>`; }
+                        "data": "Name", "render": function (data, type, full, meta) {
+                            return full.Whisky.Name;
+                        }
                     },
                     {
-                        "render": function (data, type, full, meta)
-                        { return `<a class="btn btn-warning" href="/Liquers/Details?Id=${full.Id}">Alle gegevens</a>`; }
+                        "data": "Age", "render": function (data, type, full, meta) {
+                            return full.Whisky.Age;
+                        }
                     },
                     {
-                        "render": function (data, type, full, meta)
-                        {
+                        "data": "ProductionArea", "render": function (data, type, full, meta) {
+                            return full.Whisky.ProductionArea;
+                        }
+                    },
+                    {
+                        "data": "AlcoholPercentage", "render": function (data, type, full, meta) {
+                            return full.Whisky.AlcoholPercentage;
+                        }
+                    },
+                    {
+                        "data": "Kind", "render": function (data, type, full, meta) {
+                            return full.Whisky.Kind;
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return `<a class="btn btn-info" href="/Liquers/Edit?Id=${full.Id}">Aanpassen</a>`;
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return `<a class="btn btn-warning" href="/Liquers/Details?Id=${full.Id}">Alle gegevens</a>`;
+                        }
+                    },
+                    {
+                        "render": function (data, type, full, meta) {
                             if (full.SoftDeleted === false) {
                                 return `<a class="btn btn-danger" href="/Liquers/Disable?Id=${full.Id}">Zet uit</a>`;
-
                             }
-                            else return `<a class="btn btn-success" href="/Liquers/Enable?Id=${full.Id}">Zet aan</a>`;
+
+                            return `<a class="btn btn-success" href="/Liquers/Enable?Id=${full.Id}">Zet aan</a>`;
                         }
                     },
                 ]
