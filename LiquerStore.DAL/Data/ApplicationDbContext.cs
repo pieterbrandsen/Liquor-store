@@ -34,14 +34,14 @@ namespace LiquerStore.DAL.Services.DbCommands
             //    .HasOne(b => b.Whisky)
             //    .WithOne(i => i.Storages)
             //    .HasForeignKey<WhiskyModel>(b => b.StorageForeignKey);
-            var storageEtb = modelBuilder.Entity<StorageModel>();
-            var whiskyEtb = modelBuilder.Entity<WhiskyModel>();
+            //var storageEtb = modelBuilder.Entity<StorageModel>();
+            //var whiskyEtb = modelBuilder.Entity<WhiskyModel>();
 
-            storageEtb.HasOne(c => c.Whisky).WithMany();
-            storageEtb.HasIndex(c => c.WhiskyId).IsUnique();
+            //storageEtb.HasOne(c => c.Whisky).WithMany();
+            //storageEtb.HasIndex(c => c.WhiskyId).IsUnique();
 
-            whiskyEtb.HasOne(d => d.Storages).WithMany();
-            whiskyEtb.HasIndex(c => c.StorageId).IsUnique();
+            //whiskyEtb.HasOne(d => d.Storages).WithMany();
+            //whiskyEtb.HasIndex(c => c.StorageId).IsUnique();
             base.OnModelCreating(modelBuilder);
         }
     }

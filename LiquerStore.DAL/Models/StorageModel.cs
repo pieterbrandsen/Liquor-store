@@ -14,7 +14,7 @@ namespace LiquerStore.DAL.Models
 
         public int Available { get; set; }
         public int Reserved { get; set; }
-        //public int WhiskyId { get; set; }
-        public WhiskyModel Whisky { get; set; }
+        public int WhiskyId { get; set; }
+        public virtual WhiskyModel Whisky { get; set; }
     }
 }
