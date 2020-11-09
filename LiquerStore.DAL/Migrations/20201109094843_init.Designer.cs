@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiquerStore.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201109092538_init")]
+    [Migration("20201109094843_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
