@@ -120,8 +120,7 @@ namespace LiquerStore.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WhiskyId")
-                        .IsUnique();
+                    b.HasIndex("WhiskyId");
 
                     b.ToTable("Storages");
                 });
@@ -154,18 +153,7 @@ namespace LiquerStore.DAL.Migrations
                     b.Property<bool>("SoftDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("StorageId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StoragesId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("StorageId")
-                        .IsUnique();
-
-                    b.HasIndex("StoragesId");
 
                     b.ToTable("Whiskies");
                 });
@@ -326,13 +314,6 @@ namespace LiquerStore.DAL.Migrations
                         .HasForeignKey("WhiskyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("LiquerStore.DAL.Models.WhiskyModel", b =>
-                {
-                    b.HasOne("LiquerStore.DAL.Models.StorageModel", "Storages")
-                        .WithMany()
-                        .HasForeignKey("StoragesId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
