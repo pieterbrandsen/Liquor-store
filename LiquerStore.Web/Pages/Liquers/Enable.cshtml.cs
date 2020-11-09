@@ -13,15 +13,15 @@ namespace LiquerStore.Web.Pages.Liquers
 {
     public class EnableModel : PageModel
     {
-        private readonly IWhisky _db;
+        private readonly IStorage _db;
 
-        public EnableModel(IWhisky db)
+        public EnableModel(IStorage db)
         {
             _db = db;
         }
 
         [BindProperty]
-        public WhiskyModel WhiskyModel { get; set; }
+        public StorageModel StorageModel { get; set; }
 
         public IActionResult OnGetAsync(int? id)
         {
@@ -30,9 +30,9 @@ namespace LiquerStore.Web.Pages.Liquers
                 return NotFound();
             }
 
-            WhiskyModel = _db.GetWhiskyById(id);
+            StorageModel = _db.GetWhiskyById(id);
 
-            if (WhiskyModel == null)
+            if (StorageModel == null)
             {
                 return NotFound();
             }
@@ -46,12 +46,12 @@ namespace LiquerStore.Web.Pages.Liquers
                 return NotFound();
             }
 
-            WhiskyModel = _db.GetWhiskyById(id);
-
-            if (WhiskyModel != null)
+            StorageModel = _db.GetWhiskyById(id);
+            
+            if (StorageModel != null)
             {
-                WhiskyModel.SoftDeleted = false;
-                _db.UpdateWhiskyByModel(WhiskyModel);
+                StorageModel.Whisky.SoftDeleted = false;
+                _db.UpdateWhiskyByModel(StorageModel);
             }
 
             return RedirectToPage("./Index");

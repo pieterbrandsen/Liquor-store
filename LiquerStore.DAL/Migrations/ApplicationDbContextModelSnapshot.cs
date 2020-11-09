@@ -102,20 +102,28 @@ namespace LiquerStore.DAL.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("LiquerStore.DAL.Models.UserToWhisky", b =>
+            modelBuilder.Entity("LiquerStore.DAL.Models.StorageModel", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Reserved")
-                        .HasColumnType("bit");
+                    b.Property<int>("Available")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Reserved")
+                        .HasColumnType("int");
 
                     b.Property<int>("WhiskyId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
-                    b.ToTable("UserToWhiskies");
+                    b.HasIndex("WhiskyId")
+                        .IsUnique();
+
+                    b.ToTable("Storages");
                 });
 
             modelBuilder.Entity("LiquerStore.DAL.Models.WhiskyModel", b =>
@@ -130,9 +138,6 @@ namespace LiquerStore.DAL.Migrations
 
                     b.Property<decimal>("AlcoholPercentage")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
 
                     b.Property<int>("Kind")
                         .HasColumnType("int");
@@ -149,7 +154,18 @@ namespace LiquerStore.DAL.Migrations
                     b.Property<bool>("SoftDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("StorageId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StoragesId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StorageId")
+                        .IsUnique();
+
+                    b.HasIndex("StoragesId");
 
                     b.ToTable("Whiskies");
                 });
@@ -301,6 +317,22 @@ namespace LiquerStore.DAL.Migrations
                     b.HasBaseType("LiquerStore.DAL.Models.ApplicationUser");
 
                     b.HasDiscriminator().HasValue("EmployeeModel");
+                });
+
+            modelBuilder.Entity("LiquerStore.DAL.Models.StorageModel", b =>
+                {
+                    b.HasOne("LiquerStore.DAL.Models.WhiskyModel", "Whisky")
+                        .WithMany()
+                        .HasForeignKey("WhiskyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LiquerStore.DAL.Models.WhiskyModel", b =>
+                {
+                    b.HasOne("LiquerStore.DAL.Models.StorageModel", "Storages")
+                        .WithMany()
+                        .HasForeignKey("StoragesId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
