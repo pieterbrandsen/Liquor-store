@@ -27,5 +27,8 @@ namespace LiquerStore.DAL.Models
         [Required]
         [Display(Name = "Geboortedatum")]
         public DateTime Age { get; set; }
+
+        [EmailAddress]
+        public override string Email { get; set; }
     }
 }
