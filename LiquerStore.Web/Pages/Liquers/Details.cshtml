@@ -64,12 +64,12 @@
 <div>
     @if (Model.StorageModel.SoftDeleted == false)
     {
-        <a class="btn btn-danger" asp-page="./Disable" asp-route-id="@Model.StorageModel.Id">Zet uit</a> |
+        <a class="btn btn-danger" asp-page="./Disable" asp-route-id="@Model.StorageModel.Id">Zet uit</a>
     }
     else
     {
-        <a class="btn btn-success" asp-page="./Enable" asp-route-id="@Model.StorageModel.Id">Zet aan</a> |
-    }
-    <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@Model.StorageModel.Id">Pas aan</a> |
+        <a class="btn btn-success" asp-page="./Enable" asp-route-id="@Model.StorageModel.Id">Zet aan</a>
+}
+    | <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@Model.StorageModel.Id">Pas aan</a> |
     <a class="btn btn-info" asp-page="./Index">Terug naar product lijst</a>
 </div>
