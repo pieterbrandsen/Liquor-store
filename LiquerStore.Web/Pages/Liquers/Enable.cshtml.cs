@@ -50,7 +50,7 @@ namespace LiquerStore.Web.Pages.Liquers
             
             if (StorageModel != null)
             {
-                StorageModel.Whisky.SoftDeleted = false;
+                StorageModel.SoftDeleted = false;
                 _db.UpdateWhiskyByModel(StorageModel);
             }
 

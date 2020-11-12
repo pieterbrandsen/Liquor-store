@@ -30,13 +30,13 @@
                 @Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Kind)
             </th>
             <th>
+                @Html.DisplayNameFor(w => w.StorageModels.First().Available)
+            </th>
+            <th>
                 Aanpassen
             </th>
             <th>
                 Alle gegevens
-            </th>
-            <th>
-                Uit/aanzetten
             </th>
         </tr>
     </thead>
@@ -82,6 +82,11 @@
                         }
                     },
                     {
+                        "data": "Available", "render": function (data, type, full, meta) {
+                            return full.Available;
+                        }
+                    },
+                    {
                         "render": function (data, type, full, meta) {
                             return `<a class="btn btn-info" href="/Liquers/Edit?Id=${full.Id}">Aanpassen</a>`;
                         }
@@ -89,15 +94,6 @@
                     {
                         "render": function (data, type, full, meta) {
                             return `<a class="btn btn-warning" href="/Liquers/Details?Id=${full.Id}">Alle gegevens</a>`;
-                        }
-                    },
-                    {
-                        "render": function (data, type, full, meta) {
-                            if (full.SoftDeleted === false) {
-                                return `<a class="btn btn-danger" href="/Liquers/Disable?Id=${full.Id}">Zet uit</a>`;
-                            }
-
-                            return `<a class="btn btn-success" href="/Liquers/Enable?Id=${full.Id}">Zet aan</a>`;
                         }
                     },
                 ]
