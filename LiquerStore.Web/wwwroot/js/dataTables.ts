@@ -1,4 +1,4 @@
-export const table = (data: any): void => {
+export const dataTable = (data: any): void => {
     $(document).ready(function() {
         $('#table').DataTable({
             data: data,

@@ -1,4 +1,4 @@
-export var table = function (data) {
+export var dataTable = function (data) {
     $(document).ready(function () {
         $('#table').DataTable({
             data: data,

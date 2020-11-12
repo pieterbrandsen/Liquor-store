@@ -50,11 +50,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
-    
+
     <script type="module">
-        import * as DataTables from "/js/dataTables.js";        
-        //const datatables = require("/js/dataTables.js");
-        //var requires = require("~/js/dataTables.js");
-        DataTables.table((@Html.Raw(JsonConvert.SerializeObject(Model.StorageModels))));
+        import {dataTable } from "/js/dataTables.js";        
+        dataTable((@Html.Raw(JsonConvert.SerializeObject(Model.StorageModels))));
     </script>
 }
