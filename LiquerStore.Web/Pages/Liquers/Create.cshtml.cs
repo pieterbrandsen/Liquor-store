@@ -35,7 +35,9 @@ namespace LiquerStore.Web.Pages.Liquers
             {
                 return Page();
             }
-            
+
+            StorageModel.Reserved = 0;
+
             // Add the whisky to db
             _db.AddWhisky(StorageModel);
 

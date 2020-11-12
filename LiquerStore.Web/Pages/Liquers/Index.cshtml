@@ -35,9 +35,12 @@
             <th>
                 Alle gegevens
             </th>
-            <th>
-                Uit/aanzetten
-            </th>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th>
+                    Reserveren
+                </th>
+            }
         </tr>
     </thead>
 </table>
@@ -49,7 +52,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#table').DataTable({
+            var settings = {
                 data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.StorageModels)),
                 processing: true, // for show progress bar
                 serverSide: false, // for process server side
@@ -91,17 +94,18 @@
                             return `<a class="btn btn-warning" href="/Liquers/Details?Id=${full.Id}">Alle gegevens</a>`;
                         }
                     },
-                    {
-                        "render": function (data, type, full, meta) {
-                            if (full.SoftDeleted === false) {
-                                return `<a class="btn btn-danger" href="/Liquers/Disable?Id=${full.Id}">Zet uit</a>`;
-                            }
-
-                            return `<a class="btn btn-success" href="/Liquers/Enable?Id=${full.Id}">Zet aan</a>`;
-                        }
-                    },
                 ]
-            });
+            };
+
+            if ("@User.Identity.IsAuthenticated" === "True") {
+                settings.columns.push({
+                    "render": function (data, type, full, meta) {
+                        return `<a class="btn btn-success" href="/Liquers/Reserve?Id=${full.Id}">Alle gegevens</a>`;
+                    }
+                });
+            }
+
+            $('#table').DataTable(settings);
         });
     </script>
 }
