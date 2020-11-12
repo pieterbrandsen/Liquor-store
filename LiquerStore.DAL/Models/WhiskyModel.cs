@@ -31,7 +31,6 @@ namespace LiquerStore.DAL.Models
         public WhiskyKind Kind { get; set; }
         [Display(Name = "Afbeelding locatie")]
         public string LabelPath { get; set; }
-        public bool SoftDeleted { get; set; }
     }
 
     [JsonConverter(typeof(StringEnumConverter))]

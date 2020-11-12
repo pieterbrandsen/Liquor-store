@@ -30,6 +30,9 @@
                 @Html.DisplayNameFor(w => w.StorageModels.First().Whisky.Kind)
             </th>
             <th>
+                @Html.DisplayNameFor(w => w.StorageModels.First().Available)
+            </th>
+            <th>
                 Aanpassen
             </th>
             <th>
@@ -85,13 +88,13 @@
                         }
                     },
                     {
-                        "render": function (data, type, full, meta) {
-                            return `<a class="btn btn-info" href="/Liquers/Edit?Id=${full.Id}">Aanpassen</a>`;
+                        "data": "Available", "render": function (data, type, full, meta) {
+                            return full.Available;
                         }
                     },
                     {
                         "render": function (data, type, full, meta) {
-                            return `<a class="btn btn-warning" href="/Liquers/Details?Id=${full.Id}">Alle gegevens</a>`;
+                            return `<a class="btn btn-info" href="/Liquers/Edit?Id=${full.Id}">Aanpassen</a>`;
                         }
                     },
                 ]
