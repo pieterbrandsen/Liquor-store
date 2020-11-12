@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LiquerStore.DAL.Models;
+using LiquerStore.DAL.Services.DbCommands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using LiquerStore.DAL.Models;
-using LiquerStore.DAL.Services.DbCommands;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
@@ -20,22 +14,15 @@ namespace LiquerStore.Web.Pages.Liquers
             _db = db;
         }
 
-        [BindProperty]
-        public StorageModel StorageModel { get; set; }
+        [BindProperty] public StorageModel StorageModel { get; set; }
 
         public IActionResult OnGet(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             StorageModel = _db.GetWhiskyById(id);
 
-            if (StorageModel == null)
-            {
-                return NotFound();
-            }
+            if (StorageModel == null) return NotFound();
             return Page();
         }
 
@@ -43,10 +30,7 @@ namespace LiquerStore.Web.Pages.Liquers
         // more details, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            if (!ModelState.IsValid) return Page();
 
             _db.UpdateWhiskyByModel(StorageModel);
 

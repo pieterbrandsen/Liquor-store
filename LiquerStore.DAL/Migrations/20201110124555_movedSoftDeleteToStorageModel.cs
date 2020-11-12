@@ -7,12 +7,12 @@ namespace LiquerStore.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "SoftDeleted",
-                table: "Whiskies");
+                "SoftDeleted",
+                "Whiskies");
 
             migrationBuilder.AddColumn<bool>(
-                name: "SoftDeleted",
-                table: "Storages",
+                "SoftDeleted",
+                "Storages",
                 nullable: false,
                 defaultValue: false);
         }
@@ -20,13 +20,13 @@ namespace LiquerStore.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "SoftDeleted",
-                table: "Storages");
+                "SoftDeleted",
+                "Storages");
 
             migrationBuilder.AddColumn<bool>(
-                name: "SoftDeleted",
-                table: "Whiskies",
-                type: "bit",
+                "SoftDeleted",
+                "Whiskies",
+                "bit",
                 nullable: false,
                 defaultValue: false);
         }

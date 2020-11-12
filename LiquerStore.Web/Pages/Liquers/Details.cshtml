@@ -9,7 +9,7 @@
 
 <div>
     <h4>Product</h4>
-    <hr />
+    <hr/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.StorageModel.Whisky.Name)
@@ -69,7 +69,7 @@
     else
     {
         <a class="btn btn-success" asp-page="./Enable" asp-route-id="@Model.StorageModel.Id">Zet aan</a>
-}
+    }
     | <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@Model.StorageModel.Id">Pas aan</a> |
     <a class="btn btn-info" asp-page="./Index">Terug naar product lijst</a>
 </div>

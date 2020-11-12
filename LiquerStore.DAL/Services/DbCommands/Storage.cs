@@ -1,10 +1,7 @@
-﻿using LiquerStore.DAL.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LiquerStore.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LiquerStore.DAL.Services.DbCommands
 {
@@ -12,13 +9,15 @@ namespace LiquerStore.DAL.Services.DbCommands
     {
         StorageModel GetWhiskyById(int? id);
         void AddWhisky(StorageModel StorageModel);
-            void UpdateWhiskyByModel(StorageModel StorageModel);
+        void UpdateWhiskyByModel(StorageModel StorageModel);
+
         IList<StorageModel> GetAllWhiskies();
         //int GetAllWhiskieStockById(int? id);
     }
+
     public class StorageService : IStorage
     {
-        private ApplicationDbContext db;
+        private readonly ApplicationDbContext db;
 
         public StorageService(ApplicationDbContext db)
         {
@@ -43,7 +42,7 @@ namespace LiquerStore.DAL.Services.DbCommands
             db.Attach(storageModel).State = EntityState.Modified;
             db.Storages.Update(storageModel);
 
-                db.SaveChanges();
+            db.SaveChanges();
         }
 
         public IList<StorageModel> GetAllWhiskies()

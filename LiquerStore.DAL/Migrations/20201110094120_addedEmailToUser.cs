@@ -7,24 +7,24 @@ namespace LiquerStore.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "LastName",
-                table: "AspNetUsers",
+                "LastName",
+                "AspNetUsers",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "HomeTown",
-                table: "AspNetUsers",
+                "HomeTown",
+                "AspNetUsers",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "FirstName",
-                table: "AspNetUsers",
+                "FirstName",
+                "AspNetUsers",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
@@ -34,23 +34,23 @@ namespace LiquerStore.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "LastName",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
+                "LastName",
+                "AspNetUsers",
+                "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string));
 
             migrationBuilder.AlterColumn<string>(
-                name: "HomeTown",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
+                "HomeTown",
+                "AspNetUsers",
+                "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string));
 
             migrationBuilder.AlterColumn<string>(
-                name: "FirstName",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
+                "FirstName",
+                "AspNetUsers",
+                "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string));
         }

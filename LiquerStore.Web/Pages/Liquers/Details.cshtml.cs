@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LiquerStore.DAL.Models;
+using LiquerStore.DAL.Services.DbCommands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using LiquerStore.DAL.Models;
-using LiquerStore.DAL.Services.DbCommands;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
@@ -23,17 +18,11 @@ namespace LiquerStore.Web.Pages.Liquers
 
         public IActionResult OnGet(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             StorageModel = _db.GetWhiskyById(id);
 
-            if (StorageModel == null)
-            {
-                return NotFound();
-            }
+            if (StorageModel == null) return NotFound();
             return Page();
         }
     }
