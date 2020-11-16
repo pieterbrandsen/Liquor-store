@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiquerStore.Web", "LiquerSt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiquerStore.Classes", "LiquerStore.Classes\LiquerStore.Classes.csproj", "{84C3F36A-C2EC-4520-8F1E-774E7A634B2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiquerStore.DAL", "LiquerStore.DAL\LiquerStore.DAL.csproj", "{4F23C633-969E-463B-812F-1776A39D6CE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiquerStore.DAL", "LiquerStore.DAL\LiquerStore.DAL.csproj", "{4F23C633-969E-463B-812F-1776A39D6CE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

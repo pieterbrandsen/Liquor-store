@@ -97,13 +97,18 @@
                             return `<a class="btn btn-info" href="/Liquers/Edit?Id=${full.Id}">Aanpassen</a>`;
                         }
                     },
+                    {
+                        "render": function (data, type, full, meta) {
+                            return `<a class="btn btn-info" href="/Liquers/Details?Id=${full.Id}">Alle gegevens</a>`;
+                        }
+                    },
                 ]
             };
 
             if ("@User.Identity.IsAuthenticated" === "True") {
                 settings.columns.push({
                     "render": function (data, type, full, meta) {
-                        return `<a class="btn btn-success" href="/Liquers/Reserve?Id=${full.Id}">Alle gegevens</a>`;
+                        return `<a class="btn btn-success" href="/Liquers/Reserve?Id=${full.Id}">Reserveren</a>`;
                     }
                 });
             }
