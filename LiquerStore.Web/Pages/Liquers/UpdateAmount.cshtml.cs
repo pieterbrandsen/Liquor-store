@@ -5,19 +5,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LiquerStore.Web.Pages.Liquers
 {
-    public class CreateModel : PageModel
+    public class UpdateAmountModel : PageModel
     {
         private readonly IStorage _db;
 
-        public CreateModel(IStorage db)
+        public UpdateAmountModel(IStorage db)
         {
             _db = db;
         }
 
         [BindProperty] public StorageModel StorageModel { get; set; }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int? id)
         {
+            if (id == null) return NotFound();
+
+            StorageModel = _db.GetWhiskyById(id);
+
+            if (StorageModel == null) return NotFound();
             return Page();
         }
 
@@ -25,15 +30,9 @@ namespace LiquerStore.Web.Pages.Liquers
         // more details, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            if (!ModelState.IsValid) return Page();
 
-            StorageModel.Reserved = 0;
-
-            // Add the whisky to db
-            _db.AddWhisky(StorageModel);
+            _db.UpdateWhiskyByModel(StorageModel);
 
             return RedirectToPage("./Index");
         }

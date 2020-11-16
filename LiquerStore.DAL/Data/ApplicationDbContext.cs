@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using LiquerStore.DAL.Models;
+﻿using LiquerStore.DAL.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +26,6 @@ namespace LiquerStore.DAL.Services.DbCommands
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             //modelBuilder.Entity<StorageModel>()
             //    .HasOne(b => b.Whisky)
             //    .WithOne(i => i.Storages)

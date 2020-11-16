@@ -5,4 +5,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Design", "RCS1102:Make class static.", Justification = "<Pending>", Scope = "type", Target = "~T:LiquerStore.Web.Program")]
+[assembly:
+    SuppressMessage("Design", "RCS1102:Make class static.", Justification = "<Pending>", Scope = "type",
+        Target = "~T:LiquerStore.Web.Program")]
