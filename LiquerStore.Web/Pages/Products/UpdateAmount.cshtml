@@ -1,5 +1,5 @@
 ﻿@page
-@model LiquerStore.Web.Pages.Liquers.UpdateAmountModel
+@model LiquerStore.Web.Pages.Products.UpdateAmountModel
 @using LiquerStore.DAL.Models;
 
 @{
@@ -15,6 +15,7 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="StorageModel.Id" />
+            <input type="hidden" asp-for="StorageModel.SoftDeleted" />
             <input type="hidden" asp-for="StorageModel.Whisky" />
             <h2>Aantallen</h2>
             <div class="form-group">

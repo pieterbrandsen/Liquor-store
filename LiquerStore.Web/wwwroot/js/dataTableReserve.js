@@ -20,12 +20,6 @@ export var dataTable = function (data) {
                     },
                 },
                 {
-                    data: "ProductionArea",
-                    render: function (data, type, full, meta) {
-                        return full.Whisky.ProductionArea;
-                    },
-                },
-                {
                     data: "AlcoholPercentage",
                     render: function (data, type, full, meta) {
                         return full.Whisky.AlcoholPercentage;
@@ -45,22 +39,12 @@ export var dataTable = function (data) {
                 },
                 {
                     render: function (data, type, full, meta) {
-                        return "<a class=\"btn btn-info\" href=\"/Liquers/Edit?Id=" + full.Id + "\">Aanpassen</a>";
+                        return "<a class=\"btn btn-warning\" href=\"/Reserve/Details?Id=" + full.Id + "\">Alle gegevens</a>";
                     },
                 },
                 {
                     render: function (data, type, full, meta) {
-                        return "<a class=\"btn btn-warning\" href=\"/Liquers/Details?Id=" + full.Id + "\">Alle gegevens</a>";
-                    },
-                },
-                {
-                    render: function (data, type, full, meta) {
-                        return full.Whisky.SoftDelete ? "Actief" : "Uitgezet";
-                    },
-                },
-                {
-                    render: function (data, type, full, meta) {
-                        return "<a class=\"btn btn-success\" href=\"/Liquers/Reserve?Id=" + full.Id + "\">Reserveren</a>";
+                        return "<a class=\"btn btn-success\" href=\"/Reserve/Reserve?Id=" + full.Id + "\">Reserveren</a>";
                     },
                 },
             ],

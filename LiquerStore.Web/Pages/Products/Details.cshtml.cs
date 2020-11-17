@@ -3,7 +3,7 @@ using LiquerStore.DAL.Services.DbCommands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LiquerStore.Web.Pages.Liquers
+namespace LiquerStore.Web.Pages.Products
 {
     public class DetailsModel : PageModel
     {

@@ -3,20 +3,20 @@ using LiquerStore.DAL.Services.DbCommands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LiquerStore.Web.Pages.Liquers
+namespace LiquerStore.Web.Pages.Products
 {
-    public class DisableModel : PageModel
+    public class EnableModel : PageModel
     {
         private readonly IStorage _db;
 
-        public DisableModel(IStorage db)
+        public EnableModel(IStorage db)
         {
             _db = db;
         }
 
         [BindProperty] public StorageModel StorageModel { get; set; }
 
-        public IActionResult OnGet(int? id)
+        public IActionResult OnGetAsync(int? id)
         {
             if (id == null) return NotFound();
 
@@ -34,7 +34,7 @@ namespace LiquerStore.Web.Pages.Liquers
 
             if (StorageModel != null)
             {
-                StorageModel.SoftDeleted = true;
+                StorageModel.SoftDeleted = false;
                 _db.UpdateWhiskyByModel(StorageModel);
             }
 

@@ -3,7 +3,7 @@ using LiquerStore.DAL.Models;
 using LiquerStore.DAL.Services.DbCommands;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LiquerStore.Web.Pages.Liquers
+namespace LiquerStore.Web.Pages.Reserve
 {
     public class IndexModel : PageModel
     {
@@ -14,11 +14,11 @@ namespace LiquerStore.Web.Pages.Liquers
             _db = db;
         }
 
-        public IList<StorageModel> StorageModels { get; set; }
+        public IList<StorageModel> ProductsActive { get; set; }
 
         public void OnGet()
         {
-            StorageModels = _db.GetAllWhiskies();
+            ProductsActive = _db.GetAllActiveWhiskies();
         }
     }
 }

@@ -45,22 +45,18 @@ export var dataTable = function (data) {
                 },
                 {
                     render: function (data, type, full, meta) {
-                        return "<a class=\"btn btn-info\" href=\"/Liquers/Edit?Id=" + full.Id + "\">Aanpassen</a>";
+                        return "<a class=\"btn btn-info\" href=\"/Products/Edit?Id=" + full.Id + "\">Aanpassen</a>";
                     },
                 },
                 {
                     render: function (data, type, full, meta) {
-                        return "<a class=\"btn btn-warning\" href=\"/Liquers/Details?Id=" + full.Id + "\">Alle gegevens</a>";
+                        return "<a class=\"btn btn-warning\" href=\"/Products/Details?Id=" + full.Id + "\">Alle gegevens</a>";
                     },
                 },
                 {
                     render: function (data, type, full, meta) {
-                        return full.Whisky.SoftDelete ? "Actief" : "Uitgezet";
-                    },
-                },
-                {
-                    render: function (data, type, full, meta) {
-                        return "<a class=\"btn btn-success\" href=\"/Liquers/Reserve?Id=" + full.Id + "\">Reserveren</a>";
+                        console.log(full.SoftDeleted);
+                        return full.SoftDeleted ? "Uitgezet" : "Actief";
                     },
                 },
             ],

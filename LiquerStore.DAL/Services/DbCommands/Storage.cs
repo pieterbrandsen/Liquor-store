@@ -12,7 +12,7 @@ namespace LiquerStore.DAL.Services.DbCommands
         void UpdateWhiskyByModel(StorageModel StorageModel);
 
         IList<StorageModel> GetAllWhiskies();
-        //int GetAllWhiskieStockById(int? id);
+        IList<StorageModel> GetAllActiveWhiskies();
     }
 
     public class StorageService : IStorage
@@ -52,13 +52,9 @@ namespace LiquerStore.DAL.Services.DbCommands
             //orderby s.Whisky.Name
             //select s;
         }
-
-        //public int GetAllWhiskieStockById(int? id)
-        //{
-        //    var currentStock = from w in db.UserToWhiskies
-        //           where w.WhiskyId == id
-        //           select w;
-        //    return currentStock.Count();
-        //}
+        public IList<StorageModel> GetAllActiveWhiskies()
+        {
+            return db.Storages.Include(s => s.Whisky).Where(s => s.SoftDeleted == false && s.Available > 0).ToList();
+        }
     }
 }

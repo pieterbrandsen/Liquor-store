@@ -1,12 +1,12 @@
 ﻿@page
-@model LiquerStore.Web.Pages.Liquers.CreateModel
+@model LiquerStore.Web.Pages.Products.EditWhiskyModel
 @using LiquerStore.DAL.Models;
 
 @{
-    ViewData["Title"] = "Aanmaken";
+    ViewData["Title"] = "Aanpassen";
 }
 
-<h1>Product aanmaken</h1>
+<h1>Aanpassen</h1>
 
 <h4>Product</h4>
 <hr/>
@@ -14,60 +14,54 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="StorageModel.Id" />
+            <input type="hidden" asp-for="StorageModel.SoftDeleted" />
             <div class="form-group">
                 <label asp-for="StorageModel.Whisky.Name" class="control-label"></label>
-                <input asp-for="StorageModel.Whisky.Name" class="form-control"/>
+                <input asp-for="StorageModel.Whisky.Name" class="form-control" />
                 <span asp-validation-for="StorageModel.Whisky.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StorageModel.Whisky.Age" class="control-label"></label>
-                <input asp-for="StorageModel.Whisky.Age" max="255" class="form-control"/>
+                <input asp-for="StorageModel.Whisky.Age" min="0" max="255" class="form-control" />
                 <span asp-validation-for="StorageModel.Whisky.Age" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StorageModel.Whisky.ProductionArea" class="control-label"></label>
-                <input asp-for="StorageModel.Whisky.ProductionArea" class="form-control"/>
+                <input asp-for="StorageModel.Whisky.ProductionArea" class="form-control" />
                 <span asp-validation-for="StorageModel.Whisky.ProductionArea" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StorageModel.Whisky.AlcoholPercentage" class="control-label"></label>
-                <input asp-for="StorageModel.Whisky.AlcoholPercentage" class="form-control"/>
+                <input asp-for="StorageModel.Whisky.AlcoholPercentage" class="form-control" />
                 <span asp-validation-for="StorageModel.Whisky.AlcoholPercentage" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StorageModel.Whisky.Kind" class="control-label"></label>
                 <select asp-for="StorageModel.Whisky.Kind" asp-items="Html.GetEnumSelectList<WhiskyKind>()" class="form-control">
-                    <option>Selecteer een optie ...</option>
+                    <option>StorageModel.Whisky.Kind</option>
                 </select>
                 <span asp-validation-for="StorageModel.Whisky.Kind" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StorageModel.Whisky.LabelPath" class="control-label"></label>
-                <input asp-for="StorageModel.Whisky.LabelPath" class="form-control"/>
+                <input asp-for="StorageModel.Whisky.LabelPath" class="form-control" />
                 <span asp-validation-for="StorageModel.Whisky.LabelPath" class="text-danger"></span>
             </div>
-            <br/>
-            <hr/>
-            <h2>Aantallen</h2>
+            @*
+        Aantallen
+            *@
+            <input type="hidden" asp-for="StorageModel.Reserved" />
+            <input type="hidden" asp-for="StorageModel.Available" />
             <div class="form-group">
-                <label asp-for="StorageModel.Available" class="control-label"></label>
-                <input asp-for="StorageModel.Available" class="form-control"/>
-                <span asp-validation-for="StorageModel.Available" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StorageModel.Reserved" class="control-label"></label>
-                <input asp-for="StorageModel.Reserved" class="form-control"/>
-                <span asp-validation-for="StorageModel.Reserved" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Maak aan" class="btn btn-primary"/>
+                <input type="submit" value="Sla op" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Terug naar product lijst</a>
+    <a class="btn btn-info" asp-page="./Index">Terug naar product lijst</a>
 </div>
 
 @section Scripts {
