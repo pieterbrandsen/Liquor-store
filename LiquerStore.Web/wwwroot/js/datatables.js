@@ -62,7 +62,6 @@ var Datatables = /** @class */ (function () {
                     },
                     {
                         render: function (data, type, full, meta) {
-                            console.log(full.SoftDeleted);
                             return full.SoftDeleted ? "Uitgezet" : "Actief";
                         },
                     },

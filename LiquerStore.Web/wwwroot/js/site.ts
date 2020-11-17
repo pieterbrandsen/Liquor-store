@@ -1,4 +1,4 @@
-import {Datatables} from "js/datatables";
+import { Datatables } from "./datatables.js";
 
 export class Site {
   /**
@@ -11,12 +11,12 @@ export class Site {
       case "products":
         Datatables.products(data);
         break;
-        case "reserve":
-          Datatables.reserve(data);
-          break;
-          default:
-            console.log("Wrong type input");
-            break;
+      case "reserve":
+        Datatables.reserve(data);
+        break;
+      default:
+        console.log("Wrong type input");
+        break;
     }
   }
 }

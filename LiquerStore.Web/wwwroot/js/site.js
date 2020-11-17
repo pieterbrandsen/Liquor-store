@@ -1,4 +1,4 @@
-import { Datatables } from "js/datatables";
+import { Datatables } from "./datatables.js";
 var Site = /** @class */ (function () {
     function Site() {
     }
