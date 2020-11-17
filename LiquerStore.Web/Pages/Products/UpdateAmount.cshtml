@@ -16,7 +16,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="StorageModel.Id" />
             <input type="hidden" asp-for="StorageModel.SoftDeleted" />
-            <input type="hidden" asp-for="StorageModel.Whisky" />
+
+            <input type="hidden" asp-for="StorageModel.Whisky.Age" />
+            <input type="hidden" asp-for="StorageModel.Whisky.AlcoholPercentage" />
+            <input type="hidden" asp-for="StorageModel.Whisky.Id" />
+            <input type="hidden" asp-for="StorageModel.Whisky.Kind" />
+            <input type="hidden" asp-for="StorageModel.Whisky.LabelPath" />
+            <input type="hidden" asp-for="StorageModel.Whisky.Name" />
+            <input type="hidden" asp-for="StorageModel.Whisky.ProductionArea" />
+
             <h2>Aantallen</h2>
             <div class="form-group">
                 <label asp-for="StorageModel.Available" class="control-label"></label>
@@ -25,8 +33,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="StorageModel.Reserved" class="control-label"></label>
-                <input asp-for="StorageModel.Reserved" class="form-control" disabled/>
-                <span asp-validation-for="StorageModel.Reserved" class="text-danger" ></span>
+                <input asp-for="StorageModel.Reserved" class="form-control" disabled />
+                <span asp-validation-for="StorageModel.Reserved" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Sla op" class="btn btn-primary" />
