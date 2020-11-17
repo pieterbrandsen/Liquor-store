@@ -52,7 +52,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
 
     <script type="module">
-        import { dataTable } from "/js/dataTableProducts.js";
-        dataTable(@Html.Raw(JsonConvert.SerializeObject(Model.Products)));
+        import { Site } from "/js/site.js";
+        Site.runSite(@Html.Raw(JsonConvert.SerializeObject(Model.Products)), "products");
     </script>
 }
