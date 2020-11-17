@@ -2,7 +2,7 @@
   "name": "js",
   "version": "1.0.0",
   "description": "",
-  "main": "dataTables.js",
+  "main": "/js/site.js",
   "dependencies": {
     "@types/jquery": "^3.5.4",
     "datatables.net": "^1.10.22",
