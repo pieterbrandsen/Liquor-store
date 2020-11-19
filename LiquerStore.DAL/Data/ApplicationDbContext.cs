@@ -11,10 +11,10 @@ namespace LiquerStore.DAL.Services.DbCommands
         {
         }
 
-        // All whisky storages
+        // All whisky including additional parts like count
         public DbSet<StorageModel> Storages { get; set; }
 
-        // All whiskies
+        // All whiskies types
         public DbSet<WhiskyModel> Whiskies { get; set; }
 
 
@@ -22,23 +22,6 @@ namespace LiquerStore.DAL.Services.DbCommands
         public DbSet<EmployeeModel> Employees { get; set; }
 
         // Customers
-        public DbSet<CustomerModel> Customers { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<StorageModel>()
-            //    .HasOne(b => b.Whisky)
-            //    .WithOne(i => i.Storages)
-            //    .HasForeignKey<WhiskyModel>(b => b.StorageForeignKey);
-            //var storageEtb = modelBuilder.Entity<StorageModel>();
-            //var whiskyEtb = modelBuilder.Entity<WhiskyModel>();
-
-            //storageEtb.HasOne(c => c.Whisky).WithMany();
-            //storageEtb.HasIndex(c => c.WhiskyId).IsUnique();
-
-            //whiskyEtb.HasOne(d => d.Storages).WithMany();
-            //whiskyEtb.HasIndex(c => c.StorageId).IsUnique();
-            base.OnModelCreating(modelBuilder);
-        }
+        public DbSet<UserModels> Customers { get; set; }
     }
 }
