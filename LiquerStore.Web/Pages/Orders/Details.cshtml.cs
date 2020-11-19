@@ -17,7 +17,7 @@ namespace LiquerStore.Web.Pages.Order
         }
 
         // Create a bindable variable to load on the page itself
-        public StorageModel OrderModel { get; set; }
+        public OrderModel OrderModel { get; set; }
 
         public IActionResult OnGet(int? id)
         {
