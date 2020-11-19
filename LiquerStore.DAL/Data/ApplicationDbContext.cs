@@ -24,6 +24,9 @@ namespace LiquerStore.DAL.Services.DbCommands
         // Customers
         public DbSet<CustomerModel> Customers { get; set; }
 
+        // Orders
+        public DbSet<OrderModel> Orders { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<StorageModel>()
