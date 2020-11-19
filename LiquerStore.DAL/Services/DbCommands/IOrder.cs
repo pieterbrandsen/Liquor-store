@@ -13,6 +13,7 @@ namespace LiquerStore.DAL.Services.DbCommands
         void UpdateOrderByModel(OrderModel order);
 
         IList<OrderModel> GetAllOrders();
+        IList<OrderModel> GetAllActiveOrders();
     }
 
     public class OrderService : IOrder
@@ -56,6 +57,11 @@ namespace LiquerStore.DAL.Services.DbCommands
             //return from s in db.Storages
             //orderby s.Whisky.Name
             //select s;
+        }
+
+        public IList<OrderModel> GetAllActiveOrders()
+        {
+            return db.Orders.Where(r => !r.Completed).ToList();
         }
     }
 }
