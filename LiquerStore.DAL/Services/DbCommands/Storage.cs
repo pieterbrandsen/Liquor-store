@@ -1,33 +1,40 @@
-﻿using LiquerStore.DAL.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LiquerStore.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LiquerStore.DAL.Services.DbCommands
 {
     public interface IStorage
     {
+        // Find a whisky from the Storage table with the id inputted
         StorageModel GetWhiskyById(int? id);
+        // Add a storageModel to the Storage table
         void AddWhisky(StorageModel StorageModel);
-            void UpdateWhiskyByModel(StorageModel StorageModel);
+        // Update a row from the Storage table
+        void UpdateWhiskyByModel(StorageModel StorageModel);
+
+        // Get all Whiskies from the storage table
         IList<StorageModel> GetAllWhiskies();
-        //int GetAllWhiskieStockById(int? id);
+        // Get all Whiskies that are not soft deleted and have more then 0 availiable
+        IList<StorageModel> GetAllActiveWhiskies();
     }
+
     public class StorageService : IStorage
     {
-        private ApplicationDbContext db;
+        // Get the db context
+        private readonly ApplicationDbContext db;
 
         public StorageService(ApplicationDbContext db)
         {
+            // Set the saved db context to this db context
             this.db = db;
         }
 
         public StorageModel GetWhiskyById(int? id)
         {
             // Get a whisky based on id
+            var test = db.Storages.Include(s => s.Whisky).FirstOrDefault(r => r.Id == id);
             return db.Storages.Include(s => s.Whisky).FirstOrDefault(r => r.Id == id);
         }
 
@@ -40,26 +47,22 @@ namespace LiquerStore.DAL.Services.DbCommands
 
         public void UpdateWhiskyByModel(StorageModel storageModel)
         {
+            // Update a whisky based on StorageModel
             db.Attach(storageModel).State = EntityState.Modified;
             db.Storages.Update(storageModel);
 
-                db.SaveChanges();
+            db.SaveChanges();
         }
 
         public IList<StorageModel> GetAllWhiskies()
         {
+            // Return all whiskies saved in the storage model
             return db.Storages.Include(s => s.Whisky).ToList();
-            //return from s in db.Storages
-            //orderby s.Whisky.Name
-            //select s;
         }
-
-        //public int GetAllWhiskieStockById(int? id)
-        //{
-        //    var currentStock = from w in db.UserToWhiskies
-        //           where w.WhiskyId == id
-        //           select w;
-        //    return currentStock.Count();
-        //}
+        public IList<StorageModel> GetAllActiveWhiskies()
+        {
+            // Return all whiskies that are not soft deleted and have more then 0 available
+            return db.Storages.Include(s => s.Whisky).Where(s => s.SoftDeleted == false && s.Available > 0).ToList();
+        }
     }
 }
