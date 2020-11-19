@@ -36,5 +36,27 @@ namespace LiquerStore.Web.Pages.Reserve
             if (StorageModel == null) return NotFound();
             else return Page();
         }
+
+        public IActionResult OnPost(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            StorageModel = _db.GetWhiskyById(id);
+
+            if (StorageModel != null)
+            {
+                if(StorageModel.Available > 0)
+                {
+                    StorageModel.Available--;
+                    StorageModel.Reserved++;
+                    _db.UpdateWhiskyByModel(StorageModel);
+                }
+            }
+
+            return RedirectToPage("./Index");
+        }
     }
 }
