@@ -1,0 +1,52 @@
+﻿@page
+@using Newtonsoft.Json
+@model LiquerStore.Web.Pages.Reserve.IndexModel
+
+@{
+    ViewData["Title"] = "Producten";
+}
+
+<h1>Producten</h1>
+
+<br/>
+<table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(w => w.ProductsActive.First().Whisky.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(w => w.ProductsActive.First().Whisky.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(w => w.ProductsActive.First().Whisky.AlcoholPercentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(w => w.ProductsActive.First().Whisky.Kind)
+            </th>
+            <th>
+                @Html.DisplayNameFor(w => w.ProductsActive.First().Available)
+            </th>
+            <th>
+                Alle gegevens
+            </th>
+            <th>
+                Reserveren
+            </th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
+
+    <script type="module">
+        // Import Datatables excetuter function
+        import { Site } from "/js/site.js";
+
+        // Run function
+        Site.runSite(@Html.Raw(JsonConvert.SerializeObject(Model.ProductsActive)), "reserve");
+    </script>
+}

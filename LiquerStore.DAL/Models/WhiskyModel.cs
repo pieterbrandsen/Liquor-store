@@ -8,28 +8,35 @@ namespace LiquerStore.DAL.Models
 {
     public class WhiskyModel
     {
+        // Id (Key)
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        // Name of whisky
         [Display(Name = "Naam")] public string Name { get; set; }
 
+        // Known years since it was made
         [Display(Name = "Leeftijd")] public int Age { get; set; }
 
+        // Where it is produced
         [Display(Name = "Productiegebied")] public string ProductionArea { get; set; }
 
+        // How much alchol is in the whisky
         [Display(Name = "Alcoholpercentage")] public decimal AlcoholPercentage { get; set; }
 
+        // What kind of whisky is it
         [Display(Name = "Soort")] public WhiskyKind Kind { get; set; }
 
+        // File linked
         [Display(Name = "Afbeelding locatie")] public string LabelPath { get; set; }
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
+        // Whisky kinds
     public enum WhiskyKind
     {
         Blend,
-
         [Display(Name = "Single Malt")] [EnumMember(Value = "Single Malt")]
         SingleMalt
     }

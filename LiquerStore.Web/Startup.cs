@@ -28,6 +28,8 @@ namespace LiquerStore.Web
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
+
+            // Register all whisky interfaces
             services.RegisterWhiskeyServices();
         }
 

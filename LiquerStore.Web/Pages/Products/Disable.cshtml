@@ -1,0 +1,70 @@
+﻿@page
+@model LiquerStore.Web.Pages.Products.DisableModel
+
+@{
+    ViewData["Title"] = "Zet uit";
+}
+
+<h1>Alle gegevens</h1>
+
+<h3>Ben je zeker dat je dit product wil uitzetten? Alle bestelde producten zullen nog zichtbaar zijn bij de klant</h3>
+<div>
+    <h4>Product</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.Age)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.Age)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.ProductionArea)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.ProductionArea)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.AlcoholPercentage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.AlcoholPercentage)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.Kind)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.Kind)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.LabelPath)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.LabelPath)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Available)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Available)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Reserved)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Reserved)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="StorageModel.Id"/>
+        <input type="submit" value="Zet uit" class="btn btn-danger"/> |
+        <a class="btn btn-info" asp-page="./Index">Terug naar product lijst</a>
+    </form>
+</div>
