@@ -1,0 +1,60 @@
+﻿@page
+@model LiquerStore.Web.Pages.Reserve.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Product</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.Age)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.Age)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.ProductionArea)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.ProductionArea)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.AlcoholPercentage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.AlcoholPercentage)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.Kind)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.Kind)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Whisky.LabelPath)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Whisky.LabelPath)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StorageModel.Available)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StorageModel.Available)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-info" asp-page="./Index">Terug naar product lijst</a>
+</div>
