@@ -13,12 +13,16 @@ namespace LiquerStore.Web.Pages.Reserve
     public class ReserveModel : PageModel
     {
         // Get the interface
-        private readonly IStorage _db;
+        private readonly IStorage _storage;
+        private readonly IOrder _order;
+        private readonly IUser _user;
 
-        public ReserveModel(IStorage db)
+        public ReserveModel(IStorage storage, IOrder order, IUser user)
         {
             // Save the interface to this interface
-            _db = db;
+            _storage = storage;
+            _order = order;
+            _user = user;
         }
 
         // Create a bindable variable to load on the page itself
@@ -30,7 +34,7 @@ namespace LiquerStore.Web.Pages.Reserve
             if (id == null) return NotFound();
 
             // Get a storagemodel based on id
-            StorageModel = _db.GetWhiskyById(id);
+            StorageModel = _storage.GetWhiskyById(id);
 
             // If no storage model was found, return
             if (StorageModel == null) return NotFound();
@@ -44,7 +48,7 @@ namespace LiquerStore.Web.Pages.Reserve
                 return NotFound();
             }
 
-            StorageModel = _db.GetWhiskyById(id);
+            StorageModel = _storage.GetWhiskyById(id);
 
             if (StorageModel != null)
             {
@@ -52,7 +56,14 @@ namespace LiquerStore.Web.Pages.Reserve
                 {
                     StorageModel.Available--;
                     StorageModel.Reserved++;
-                    _db.UpdateWhiskyByModel(StorageModel);
+                    _storage.UpdateWhiskyByModel(StorageModel);
+
+                    OrderModel orderModel = new OrderModel();
+                    orderModel.Completed = false;
+                    orderModel.Customer = _user.GetUserByName(User.Identity.Name);
+                    orderModel.Whisky = StorageModel.Whisky;
+
+                    _order.AddOrder(orderModel);
                 }
             }
 

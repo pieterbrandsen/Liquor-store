@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace LiquerStore.DAL.Services.DbCommands
 {
-    public interface IUserToWhisky
+    public interface IOrder
     {
         OrderModel GetOrderById(int? id);
         IList<OrderModel> GetAllOrdersByUser(ApplicationUser user);
@@ -15,11 +15,11 @@ namespace LiquerStore.DAL.Services.DbCommands
         IList<OrderModel> GetAllOrders();
     }
 
-    public class UserToWhiskyService : IUserToWhisky
+    public class OrderService : IOrder
     {
         private ApplicationDbContext db;
 
-        public UserToWhiskyService(ApplicationDbContext db)
+        public OrderService(ApplicationDbContext db)
         {
             this.db = db;
         }
