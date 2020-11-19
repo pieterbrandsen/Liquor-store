@@ -43,7 +43,10 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
 
     <script type="module">
+        // Import Datatables excetuter function
         import { Site } from "/js/site.js";
+
+        // Run function
         Site.runSite(@Html.Raw(JsonConvert.SerializeObject(Model.ProductsActive)), "reserve");
     </script>
 }
