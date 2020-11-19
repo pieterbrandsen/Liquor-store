@@ -1,6 +1,6 @@
 ﻿@page
 @using Newtonsoft.Json
-@model LiquerStore.Web.Pages.Orders.IndexModel
+@model LiquerStore.Web.Pages.Order.IndexModel
 
 @{
     ViewData["Title"] = "Producten";
@@ -13,25 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(w => w..First().Whisky.Name)
+                @Html.DisplayNameFor(w => w.OrdersActive.First().Customer.FullName)
             </th>
             <th>
-                @Html.DisplayNameFor(w => w.ProductsActive.First().Whisky.Age)
+                @Html.DisplayNameFor(w => w.OrdersActive.First().Whisky.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(w => w.ProductsActive.First().Whisky.AlcoholPercentage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(w => w.ProductsActive.First().Whisky.Kind)
-            </th>
-            <th>
-                @Html.DisplayNameFor(w => w.ProductsActive.First().Available)
+                @Html.DisplayNameFor(w => w.OrdersActive.First().Completed)
             </th>
             <th>
                 Alle gegevens
-            </th>
-            <th>
-                Reserveren
             </th>
         </tr>
     </thead>
@@ -47,6 +38,6 @@
         import { Site } from "/js/site.js";
 
         // Run function
-        Site.runSite(@Html.Raw(JsonConvert.SerializeObject(Model.OrdersActive)), "reserve");
+        Site.runSite(@Html.Raw(JsonConvert.SerializeObject(Model.OrdersActive)), "orders");
     </script>
 }
