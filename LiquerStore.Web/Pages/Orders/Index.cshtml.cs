@@ -22,7 +22,7 @@ namespace LiquerStore.Web.Pages.Order
         public void OnGet()
         {
             // Get all active orders from DB
-            OrdersActive = _db.GetAllActive();
+            OrdersActive = _db.GetAllActiveOrders();
         }
     }
 }
