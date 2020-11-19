@@ -125,4 +125,4 @@ export class Datatables {
       });	
     });	
   }	
-}
+} 
