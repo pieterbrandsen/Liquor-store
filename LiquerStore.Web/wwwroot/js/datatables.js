@@ -126,6 +126,46 @@ var Datatables = /** @class */ (function () {
             });
         });
     };
+    /**
+   * Update the table based on orders fields
+   * @param data A string containing the data in JSON format
+   */
+    Datatables.orders = function (data) {
+        $(document).ready(function () {
+            $("#table").DataTable({
+                data: data,
+                processing: true,
+                serverSide: false,
+                // filter: true, // this is for disable filter (search box)	
+                orderMulti: false,
+                columns: [
+                    {
+                        data: "FullName",
+                        render: function (data, type, full, meta) {
+                            return full.Whisky.Name;
+                        },
+                    },
+                    {
+                        data: "Name",
+                        render: function (data, type, full, meta) {
+                            return full.Whisky.Age;
+                        },
+                    },
+                    {
+                        data: "Completed",
+                        render: function (data, type, full, meta) {
+                            return full.Whisky.AlcoholPercentage;
+                        },
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<a class=\"btn btn-warning\" href=\"/Orders/Details?Id=" + full.Id + "\">Alle gegevens</a>";
+                        },
+                    },
+                ],
+            });
+        });
+    };
     return Datatables;
 }());
 export { Datatables };
