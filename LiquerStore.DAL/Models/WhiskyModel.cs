@@ -32,10 +32,11 @@ namespace LiquerStore.DAL.Models
         [Display(Name = "Afbeelding locatie")] public string LabelPath { get; set; }
     }
 
+    // Whisky kinds
     [JsonConverter(typeof(StringEnumConverter))]
-        // Whisky kinds
     public enum WhiskyKind
     {
+        [Display(Name = "Blend")] [EnumMember(Value = "Blend")]
         Blend,
         [Display(Name = "Single Malt")] [EnumMember(Value = "Single Malt")]
         SingleMalt
