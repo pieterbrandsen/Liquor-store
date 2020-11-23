@@ -8,7 +8,9 @@ namespace LiquerStore.Web
         public static IServiceCollection RegisterWhiskeyServices(this IServiceCollection services)
         {
             return services
-                .AddTransient<IWhisky, WhiskyService>();
+                .AddTransient<IStorage, StorageService>()
+                .AddTransient<IOrder, OrderService>()
+                .AddTransient<IUser, UserService>();
         }
     }
 }

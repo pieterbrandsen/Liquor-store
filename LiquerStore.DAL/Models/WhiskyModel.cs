@@ -1,43 +1,44 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
-using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace LiquerStore.DAL.Models
 {
     public class WhiskyModel
     {
+        // Id (Key)
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        
-        [Display(Name = "Naam")]
-        public string Name { get; set; }
-        
-        [Display(Name = "Leeftijd")]
-        public int Age { get; set; }
 
-        [Display(Name = "Productiegebied")]
-        public string ProductionArea { get; set; }
+        // Name of whisky
+        [Display(Name = "Naam")] public string Name { get; set; }
 
-        [Display(Name = "Alcoholpercentage")]
-        public decimal AlcoholPercentage { get; set; }
+        // Known years since it was made
+        [Display(Name = "Leeftijd")] public int Age { get; set; }
 
-        [Display(Name = "Soort")]
-        public WhiskyKind Kind { get; set; }
-        [Display(Name = "Afbeelding locatie")]
-        public string LabelPath { get; set; }
-        public bool SoftDeleted { get; set; }
+        // Where it is produced
+        [Display(Name = "Productiegebied")] public string ProductionArea { get; set; }
+
+        // How much alchol is in the whisky
+        [Display(Name = "Alcoholpercentage")] public decimal AlcoholPercentage { get; set; }
+
+        // What kind of whisky is it
+        [Display(Name = "Soort")] public WhiskyKind Kind { get; set; }
+
+        // File linked
+        [Display(Name = "Afbeelding locatie")] public string LabelPath { get; set; }
     }
 
+    // Whisky kinds
     [JsonConverter(typeof(StringEnumConverter))]
     public enum WhiskyKind
     {
+        [Display(Name = "Blend")] [EnumMember(Value = "Blend")]
         Blend,
-        [Display(Name = "Single Malt"), EnumMember(Value = "Single Malt")] SingleMalt
+        [Display(Name = "Single Malt")] [EnumMember(Value = "Single Malt")]
+        SingleMalt
     }
 }
