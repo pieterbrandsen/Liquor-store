@@ -22,12 +22,27 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index">Producten</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Reserve/Index">Reserveren</a>
-                    </li>
+                    @using Microsoft.AspNetCore.Authorization
+                    @inject IAuthorizationService AuthorizationService
+                    @using LiquerStore.DAL.Models;
+                    @inject SignInManager<ApplicationUser> SignInManager
+                    @inject UserManager<ApplicationUser> UserManager
+
+                    @if ((await AuthorizationService.AuthorizeAsync(User, null, "Customer")).Succeeded)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Reserve/Index">Reserveren</a>
+                        </li>
+                    }
+                    else if ((await AuthorizationService.AuthorizeAsync(User, null, "Employee")).Succeeded)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index">Producten</a>
+                        </li>
+                    }
+
+
+
                 </ul>
             </div>
         </div>

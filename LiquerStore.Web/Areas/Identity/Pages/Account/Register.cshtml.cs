@@ -57,7 +57,7 @@ namespace LiquerStore.Web.Areas.Identity.Pages.Account
                 var user = new ApplicationUser
                 {
                     UserName = Input.Email, Email = Input.Email, Age = Input.Age, FirstName = Input.FirstName,
-                    LastName = Input.LastName, HomeTown = Input.HomeTown
+                    LastName = Input.LastName, HomeTown = Input.HomeTown, Role = Input.Role
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

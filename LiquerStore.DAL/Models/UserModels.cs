@@ -1,7 +1,7 @@
 ﻿namespace LiquerStore.DAL.Models
 {
     // Customer type
-    public class UserModels : ApplicationUser
+    public class CustomerModel : ApplicationUser
     {
     }
     // Employee type

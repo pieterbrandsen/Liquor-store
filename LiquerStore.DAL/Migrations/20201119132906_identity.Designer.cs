@@ -4,14 +4,16 @@ using LiquerStore.DAL.Services.DbCommands;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LiquerStore.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201119132906_identity")]
+    partial class identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +34,10 @@ namespace LiquerStore.DAL.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -100,31 +106,8 @@ namespace LiquerStore.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
 
-            modelBuilder.Entity("LiquerStore.DAL.Models.OrderModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Completed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("WhiskyId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("WhiskyId");
-
-                    b.ToTable("Orders");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("LiquerStore.DAL.Models.StorageModel", b =>
@@ -318,15 +301,18 @@ namespace LiquerStore.DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("LiquerStore.DAL.Models.OrderModel", b =>
+            modelBuilder.Entity("LiquerStore.DAL.Models.EmployeeModel", b =>
                 {
-                    b.HasOne("LiquerStore.DAL.Models.ApplicationUser", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
+                    b.HasBaseType("LiquerStore.DAL.Models.ApplicationUser");
 
-                    b.HasOne("LiquerStore.DAL.Models.WhiskyModel", "Whisky")
-                        .WithMany()
-                        .HasForeignKey("WhiskyId");
+                    b.HasDiscriminator().HasValue("EmployeeModel");
+                });
+
+            modelBuilder.Entity("LiquerStore.DAL.Models.UserModels", b =>
+                {
+                    b.HasBaseType("LiquerStore.DAL.Models.ApplicationUser");
+
+                    b.HasDiscriminator().HasValue("UserModels");
                 });
 
             modelBuilder.Entity("LiquerStore.DAL.Models.StorageModel", b =>

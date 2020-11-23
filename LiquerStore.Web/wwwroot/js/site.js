@@ -15,6 +15,9 @@ var Site = /** @class */ (function () {
             case "reserve":
                 Datatables.reserve(data);
                 break;
+            case "orders":
+                Datatables.orders(data);
+                break;
             default:
                 console.log("Wrong type input");
                 break;

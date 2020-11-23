@@ -17,11 +17,10 @@ namespace LiquerStore.DAL.Services.DbCommands
         // All whiskies types
         public DbSet<WhiskyModel> Whiskies { get; set; }
 
-
-        // Employees
-        public DbSet<EmployeeModel> Employees { get; set; }
+        // Users
+        public DbSet<ApplicationUser> Users { get; set; }
 
         // Customers
-        public DbSet<UserModels> Customers { get; set; }
+        public DbSet<OrderModel> Orders { get; set; }
     }
 }
