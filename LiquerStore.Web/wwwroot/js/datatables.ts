@@ -157,11 +157,6 @@ export class Datatables {
               return full.Whisky.AlcoholPercentage;	
             },	
           },	
-          {	
-            render: function (data, type, full, meta) {	
-              return `<a class="btn btn-warning" href="/Orders/Details?Id=${full.Id}">Alle gegevens</a>`;	
-            },	
-          },	
         ],	
       });	
     });	
