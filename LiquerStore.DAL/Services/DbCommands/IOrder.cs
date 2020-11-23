@@ -28,12 +28,12 @@ namespace LiquerStore.DAL.Services.DbCommands
         public OrderModel GetOrderById(int? id)
         {
             // Get a whisky based on id
-            return db.Orders.FirstOrDefault(r => r.Id == id);
+            return db.Orders.Include(s => s.Whisky).Include(s => s.Customer).FirstOrDefault(r => r.Id == id);
         }
 
         public IList<OrderModel> GetAllOrdersByUser(ApplicationUser user)
         {
-           return db.Orders.Where(r => r.Customer.Id == user.Id).ToList();
+           return db.Orders.Include(s => s.Whisky).Include(s => s.Customer).Where(r => r.Customer.Id == user.Id).ToList();
         }
 
         public void AddOrder(OrderModel order)
@@ -53,15 +53,12 @@ namespace LiquerStore.DAL.Services.DbCommands
 
         public IList<OrderModel> GetAllOrders()
         {
-            return db.Orders.ToList();
-            //return from s in db.Storages
-            //orderby s.Whisky.Name
-            //select s;
+            return db.Orders.Include(s => s.Whisky).Include(s => s.Customer).ToList();
         }
 
         public IList<OrderModel> GetAllActiveOrders()
         {
-            return db.Orders.Where(r => !r.Completed).ToList();
+            return db.Orders.Include(s => s.Whisky).Include(s => s.Customer).Where(r => !r.Completed).ToList();
         }
     }
 }
