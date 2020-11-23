@@ -10,8 +10,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiquerStore.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+<<<<<<< Updated upstream:LiquerStore.DAL/Migrations/20201110094120_addedEmailToUser.Designer.cs
     [Migration("20201110094120_addedEmailToUser")]
     partial class addedEmailToUser
+=======
+    [Migration("20201105135003_added-UserToWhisky")]
+    partial class addedUserToWhisky
+>>>>>>> Stashed changes:LiquerStore.DAL/Migrations/20201105144533_init.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,6 +111,7 @@ namespace LiquerStore.DAL.Migrations
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
                 });
+<<<<<<< Updated upstream:LiquerStore.DAL/Migrations/20201110094120_addedEmailToUser.Designer.cs
 
             modelBuilder.Entity("LiquerStore.DAL.Models.StorageModel", b =>
                 {
@@ -119,15 +125,30 @@ namespace LiquerStore.DAL.Migrations
 
                     b.Property<int>("Reserved")
                         .HasColumnType("int");
+=======
+            modelBuilder.Entity("LiquerStore.DAL.Models.UserToWhisky", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Reserved")
+                        .HasColumnType("bit");
+>>>>>>> Stashed changes:LiquerStore.DAL/Migrations/20201105144533_init.Designer.cs
 
                     b.Property<int>("WhiskyId")
                         .HasColumnType("int");
 
+<<<<<<< Updated upstream:LiquerStore.DAL/Migrations/20201110094120_addedEmailToUser.Designer.cs
                     b.HasKey("Id");
 
                     b.HasIndex("WhiskyId");
 
                     b.ToTable("Storages");
+=======
+                    b.HasKey("UserId");
+
+                    b.ToTable("UserToWhiskies");
+>>>>>>> Stashed changes:LiquerStore.DAL/Migrations/20201105144533_init.Designer.cs
                 });
 
             modelBuilder.Entity("LiquerStore.DAL.Models.WhiskyModel", b =>
