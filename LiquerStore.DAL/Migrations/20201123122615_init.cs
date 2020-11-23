@@ -8,24 +8,26 @@ namespace LiquerStore.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                "AspNetRoles",
-                table => new
+                name: "AspNetRoles",
+                columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
                 },
-                constraints: table => { table.PrimaryKey("PK_AspNetRoles", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
-                "AspNetUsers",
-                table => new
+                name: "AspNetUsers",
+                columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
@@ -37,17 +39,21 @@ namespace LiquerStore.DAL.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    HomeTown = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    HomeTown = table.Column<string>(nullable: false),
                     Age = table.Column<DateTime>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false)
+                    Role = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(maxLength: 256, nullable: true)
                 },
-                constraints: table => { table.PrimaryKey("PK_AspNetUsers", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
-                "Whiskies",
-                table => new
+                name: "Whiskies",
+                columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -56,14 +62,16 @@ namespace LiquerStore.DAL.Migrations
                     ProductionArea = table.Column<string>(nullable: true),
                     AlcoholPercentage = table.Column<decimal>(nullable: false),
                     Kind = table.Column<int>(nullable: false),
-                    LabelPath = table.Column<string>(nullable: true),
-                    SoftDeleted = table.Column<bool>(nullable: false)
+                    LabelPath = table.Column<string>(nullable: true)
                 },
-                constraints: table => { table.PrimaryKey("PK_Whiskies", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Whiskies", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
-                "AspNetRoleClaims",
-                table => new
+                name: "AspNetRoleClaims",
+                columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -75,16 +83,16 @@ namespace LiquerStore.DAL.Migrations
                 {
                     table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
-                        "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        x => x.RoleId,
-                        "AspNetRoles",
-                        "Id",
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                "AspNetUserClaims",
-                table => new
+                name: "AspNetUserClaims",
+                columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -96,16 +104,16 @@ namespace LiquerStore.DAL.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
-                        "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        x => x.UserId,
-                        "AspNetUsers",
-                        "Id",
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                "AspNetUserLogins",
-                table => new
+                name: "AspNetUserLogins",
+                columns: table => new
                 {
                     LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
                     ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
@@ -114,42 +122,42 @@ namespace LiquerStore.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new {x.LoginProvider, x.ProviderKey});
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        x => x.UserId,
-                        "AspNetUsers",
-                        "Id",
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                "AspNetUserRoles",
-                table => new
+                name: "AspNetUserRoles",
+                columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
                     RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new {x.UserId, x.RoleId});
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        x => x.RoleId,
-                        "AspNetRoles",
-                        "Id",
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        x => x.UserId,
-                        "AspNetUsers",
-                        "Id",
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                "AspNetUserTokens",
-                table => new
+                name: "AspNetUserTokens",
+                columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
                     LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
@@ -158,109 +166,150 @@ namespace LiquerStore.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new {x.UserId, x.LoginProvider, x.Name});
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        x => x.UserId,
-                        "AspNetUsers",
-                        "Id",
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                "Storages",
-                table => new
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<string>(nullable: true),
+                    WhiskyId = table.Column<int>(nullable: true),
+                    Completed = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_Whiskies_WhiskyId",
+                        column: x => x.WhiskyId,
+                        principalTable: "Whiskies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Storages",
+                columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Available = table.Column<int>(nullable: false),
                     Reserved = table.Column<int>(nullable: false),
-                    WhiskyId = table.Column<int>(nullable: false)
+                    WhiskyId = table.Column<int>(nullable: false),
+                    SoftDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Storages", x => x.Id);
                     table.ForeignKey(
-                        "FK_Storages_Whiskies_WhiskyId",
-                        x => x.WhiskyId,
-                        "Whiskies",
-                        "Id",
+                        name: "FK_Storages_Whiskies_WhiskyId",
+                        column: x => x.WhiskyId,
+                        principalTable: "Whiskies",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                "IX_AspNetRoleClaims_RoleId",
-                "AspNetRoleClaims",
-                "RoleId");
+                name: "IX_AspNetRoleClaims_RoleId",
+                table: "AspNetRoleClaims",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                "RoleNameIndex",
-                "AspNetRoles",
-                "NormalizedName",
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                "IX_AspNetUserClaims_UserId",
-                "AspNetUserClaims",
-                "UserId");
+                name: "IX_AspNetUserClaims_UserId",
+                table: "AspNetUserClaims",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                "IX_AspNetUserLogins_UserId",
-                "AspNetUserLogins",
-                "UserId");
+                name: "IX_AspNetUserLogins_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                "IX_AspNetUserRoles_RoleId",
-                "AspNetUserRoles",
-                "RoleId");
+                name: "IX_AspNetUserRoles_RoleId",
+                table: "AspNetUserRoles",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                "EmailIndex",
-                "AspNetUsers",
-                "NormalizedEmail");
+                name: "EmailIndex",
+                table: "AspNetUsers",
+                column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                "UserNameIndex",
-                "AspNetUsers",
-                "NormalizedUserName",
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                "IX_Storages_WhiskyId",
-                "Storages",
-                "WhiskyId");
+                name: "IX_Orders_CustomerId",
+                table: "Orders",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_WhiskyId",
+                table: "Orders",
+                column: "WhiskyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Storages_WhiskyId",
+                table: "Storages",
+                column: "WhiskyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                "AspNetRoleClaims");
+                name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
-                "AspNetUserClaims");
+                name: "AspNetUserClaims");
 
             migrationBuilder.DropTable(
-                "AspNetUserLogins");
+                name: "AspNetUserLogins");
 
             migrationBuilder.DropTable(
-                "AspNetUserRoles");
+                name: "AspNetUserRoles");
 
             migrationBuilder.DropTable(
-                "AspNetUserTokens");
+                name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                "Storages");
+                name: "Orders");
 
             migrationBuilder.DropTable(
-                "AspNetRoles");
+                name: "Storages");
 
             migrationBuilder.DropTable(
-                "AspNetUsers");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                "Whiskies");
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Whiskies");
         }
     }
 }

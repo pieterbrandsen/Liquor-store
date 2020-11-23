@@ -18,7 +18,7 @@ namespace LiquerStore.DAL.Services.DbCommands
         public DbSet<WhiskyModel> Whiskies { get; set; }
 
         // Users
-        public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         // Customers
         public DbSet<OrderModel> Orders { get; set; }
